@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 /*  
   Este service se encargará de las operaciones con la base de datos firebase.
 */
-
+ 
 @Injectable()
 export class FirebaseServiceProvider {
 

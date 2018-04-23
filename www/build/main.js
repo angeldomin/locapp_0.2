@@ -162,11 +162,10 @@ var FirebaseServiceProvider = /** @class */ (function () {
     };
     FirebaseServiceProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_firebase__["a" /* Firebase */],
-            __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_firebase__["a" /* Firebase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_firebase__["a" /* Firebase */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _c || Object])
     ], FirebaseServiceProvider);
     return FirebaseServiceProvider;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=firebase-service.js.map
@@ -199,11 +198,11 @@ var map = {
 		2
 	],
 	"../pages/new-dispositivo/new-dispositivo.module": [
-		509,
+		510,
 		1
 	],
 	"../pages/usuario/usuario.module": [
-		510,
+		509,
 		0
 	]
 };
@@ -646,7 +645,7 @@ true if duplicate devices should be reported, false (default) if devices should 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__buscador_buscador__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_service_firebase_service__ = __webpack_require__(119);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__usuario_usuario__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__usuario_usuario__ = __webpack_require__(87);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -730,8 +729,8 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_status_bar__ = __webpack_require__(312);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_splash_screen__ = __webpack_require__(313);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_buscador_buscador__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_new_dispositivo_new_dispositivo__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_usuario_usuario__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_new_dispositivo_new_dispositivo__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_usuario_usuario__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_firebase_service_firebase_service__ = __webpack_require__(119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_angularfire2__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2_database__ = __webpack_require__(258);
@@ -794,8 +793,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/buscador/buscador.module#BuscadorPageModule', name: 'BuscadorPage', segment: 'buscador', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/new-dispositivo/new-dispositivo.module#NewDispositivoPageModule', name: 'NewDispositivoPage', segment: 'new-dispositivo', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/usuario/usuario.module#UsuarioPageModule', name: 'UsuarioPage', segment: 'usuario', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/usuario/usuario.module#UsuarioPageModule', name: 'UsuarioPage', segment: 'usuario', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/new-dispositivo/new-dispositivo.module#NewDispositivoPageModule', name: 'NewDispositivoPage', segment: 'new-dispositivo', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_17_angularfire2_database__["b" /* AngularFireDatabaseModule */],
@@ -860,8 +859,8 @@ var Dispositivo = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(314);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_buscador_buscador__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_new_dispositivo_new_dispositivo__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_usuario_usuario__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_new_dispositivo_new_dispositivo__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_usuario_usuario__ = __webpack_require__(87);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1080,93 +1079,10 @@ var BuscadorPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewDispositivoPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__ = __webpack_require__(359);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_ble_service_ble_service__ = __webpack_require__(209);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-/**
- * Generated class for the NewDispositivoPage page.
- *
- * Aquí la búsqueda de dispositivos y asignación a un usuario.
- */
-var NewDispositivoPage = /** @class */ (function () {
-    function NewDispositivoPage(navCtrl, navParams, _bleService) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this._bleService = _bleService;
-    }
-    NewDispositivoPage.prototype.ionViewDidLoad = function () {
-        this.usuario = this.navParams.get('usuario');
-        this.callback = this.navParams.get('callback');
-        /* Buscamos dispositivos guardados anteriormente.
-          puede que tengamos que diferenciar los que están asignados de los que no y mostrar algo distinto (color o icono)
-          y la posibilidad de quitar asignacion anterior y asignar a otro usuario, igual se puede mostrar el color en rojo
-          si está en uso y gris si no y meter botón de olvidar
-        */
-        // buscar los dispositivos guardados anteriormente
-        // simulamos esta busqueda en nuestra base de datos (no se si necesitaremos indicador de asignado)
-        this.dispositivosConocidos = [new __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__["a" /* Dispositivo */]('ID11', '000000011', 'Dispositivo 11', 'Dispositivo conocido 11')];
-        this.dispositivosConocidos.push(new __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__["a" /* Dispositivo */]('ID12', '000000012', 'Dispositivo 12', 'Dispositivo conocido 12'));
-    };
-    NewDispositivoPage.prototype.buscar = function () {
-        var _this = this;
-        // simulado
-        this.dispositivos = [new __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__["a" /* Dispositivo */]('ID01', '000000000', 'Dispositivo 0', 'Dispositivo simulado 0')];
-        this.dispositivos.push(new __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__["a" /* Dispositivo */]('ID02', '000000001', 'Dispositivo 1', 'Dispositivo simulado 1'));
-        this.dispositivos.push(new __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__["a" /* Dispositivo */]('ID03', '000000002', 'Dispositivo 2', 'Dispositivo simulado 2'));
-        this.dispositivos.push(new __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__["a" /* Dispositivo */]('ID04', '000000003', 'Dispositivo 3', 'Dispositivo simulado 3'));
-        // verdadero 
-        // nos suscribimos a observable de dispositivos, la lista de dispositivos que encuentra
-        this.dispositivosRef = this._bleService.dispositivosSalida$.subscribe(function (response) {
-            _this.dispositivos = response;
-        });
-        this._bleService.scan();
-    };
-    NewDispositivoPage.prototype.registrar = function (dispositivo) {
-        var _this = this;
-        this.usuario.id_dispositivo = dispositivo._id;
-        // hacemos uso de callback para pasar el usuario modificado con el id del dispositivo   
-        this.callback(this.usuario).then(function () {
-            _this.navCtrl.pop();
-        });
-    };
-    NewDispositivoPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-new-dispositivo',template:/*ion-inline-start:"C:\proyectos\locapp_0.2\src\pages\new-dispositivo\new-dispositivo.html"*/'<!--\n  Html correspondiente a la pantalla de registrar nuevo dispositivo\n-->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Dispositivos Bluetooth</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>  \n  <div> <!-- dispositivos registrados anteriormente -->\n    <ion-label>Dispositivos conocidos:</ion-label>\n    <ion-list>\n        <button ion-item *ngFor="let dispositivo of dispositivosConocidos" (click)="registrar(dispositivo)">      \n          {{dispositivo.nombre_dispositivo}} {{dispositivo.descripcion}}      \n        </button>\n    </ion-list>\n  </div>\n  <br><br>\n  <button ion-button (click)="buscar()">Buscar dispositivos Bluetooth</button>\n  <ion-list>\n    <button ion-item *ngFor="let dispositivo of dispositivos" (click)="registrar(dispositivo)">      \n      {{dispositivo.nombre_dispositivo}} {{dispositivo.descripcion}}      \n    </button>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\proyectos\locapp_0.2\src\pages\new-dispositivo\new-dispositivo.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_ble_service_ble_service__["a" /* BleServiceProvider */]])
-    ], NewDispositivoPage);
-    return NewDispositivoPage;
-}());
-
-//# sourceMappingURL=new-dispositivo.js.map
-
-/***/ }),
-
-/***/ 88:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UsuarioPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__new_dispositivo_new_dispositivo__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__new_dispositivo_new_dispositivo__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_usuario__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_firebase_service_firebase_service__ = __webpack_require__(119);
@@ -1260,6 +1176,89 @@ var UsuarioPage = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=usuario.js.map
+
+/***/ }),
+
+/***/ 88:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewDispositivoPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__ = __webpack_require__(359);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_ble_service_ble_service__ = __webpack_require__(209);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Generated class for the NewDispositivoPage page.
+ *
+ * Aquí la búsqueda de dispositivos y asignación a un usuario.
+ */
+var NewDispositivoPage = /** @class */ (function () {
+    function NewDispositivoPage(navCtrl, navParams, _bleService) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this._bleService = _bleService;
+    }
+    NewDispositivoPage.prototype.ionViewDidLoad = function () {
+        this.usuario = this.navParams.get('usuario');
+        this.callback = this.navParams.get('callback');
+        /* Buscamos dispositivos guardados anteriormente.
+          puede que tengamos que diferenciar los que están asignados de los que no y mostrar algo distinto (color o icono)
+          y la posibilidad de quitar asignacion anterior y asignar a otro usuario, igual se puede mostrar el color en rojo
+          si está en uso y gris si no y meter botón de olvidar
+        */
+        // buscar los dispositivos guardados anteriormente
+        // simulamos esta busqueda en nuestra base de datos (no se si necesitaremos indicador de asignado)
+        this.dispositivosConocidos = [new __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__["a" /* Dispositivo */]('ID11', '000000011', 'Dispositivo 11', 'Dispositivo conocido 11')];
+        this.dispositivosConocidos.push(new __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__["a" /* Dispositivo */]('ID12', '000000012', 'Dispositivo 12', 'Dispositivo conocido 12'));
+    };
+    NewDispositivoPage.prototype.buscar = function () {
+        var _this = this;
+        // simulado
+        this.dispositivos = [new __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__["a" /* Dispositivo */]('ID01', '000000000', 'Dispositivo 0', 'Dispositivo simulado 0')];
+        this.dispositivos.push(new __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__["a" /* Dispositivo */]('ID02', '000000001', 'Dispositivo 1', 'Dispositivo simulado 1'));
+        this.dispositivos.push(new __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__["a" /* Dispositivo */]('ID03', '000000002', 'Dispositivo 2', 'Dispositivo simulado 2'));
+        this.dispositivos.push(new __WEBPACK_IMPORTED_MODULE_2__models_dispositivo__["a" /* Dispositivo */]('ID04', '000000003', 'Dispositivo 3', 'Dispositivo simulado 3'));
+        // verdadero 
+        // nos suscribimos a observable de dispositivos, la lista de dispositivos que encuentra
+        this.dispositivosRef = this._bleService.dispositivosSalida$.subscribe(function (response) {
+            _this.dispositivos = response;
+        });
+        this._bleService.scan();
+    };
+    NewDispositivoPage.prototype.registrar = function (dispositivo) {
+        var _this = this;
+        this.usuario.id_dispositivo = dispositivo._id;
+        // hacemos uso de callback para pasar el usuario modificado con el id del dispositivo   
+        this.callback(this.usuario).then(function () {
+            _this.navCtrl.pop();
+        });
+    };
+    NewDispositivoPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-new-dispositivo',template:/*ion-inline-start:"C:\proyectos\locapp_0.2\src\pages\new-dispositivo\new-dispositivo.html"*/'<!--\n  Html correspondiente a la pantalla de registrar nuevo dispositivo\n-->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Dispositivos Bluetooth</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>  \n  <div> <!-- dispositivos registrados anteriormente -->\n    <ion-label>Dispositivos conocidos:</ion-label>\n    <ion-list>\n        <button ion-item *ngFor="let dispositivo of dispositivosConocidos" (click)="registrar(dispositivo)">      \n          {{dispositivo.nombre_dispositivo}} {{dispositivo.descripcion}}      \n        </button>\n    </ion-list>\n  </div>\n  <br><br>\n  <button ion-button (click)="buscar()">Buscar dispositivos Bluetooth</button>\n  <ion-list>\n    <button ion-item *ngFor="let dispositivo of dispositivos" (click)="registrar(dispositivo)">      \n      {{dispositivo.nombre_dispositivo}} {{dispositivo.descripcion}}      \n    </button>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\proyectos\locapp_0.2\src\pages\new-dispositivo\new-dispositivo.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_ble_service_ble_service__["a" /* BleServiceProvider */]])
+    ], NewDispositivoPage);
+    return NewDispositivoPage;
+}());
+
+//# sourceMappingURL=new-dispositivo.js.map
 
 /***/ })
 
