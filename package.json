@@ -1,9 +1,9 @@
 {
   "name": "locapp",
   "version": "0.2.0",
-  "author": "Ionic Framework",
+  "author": "Angel Domingo",
   "homepage": "http://ionicframework.com/",
-  "private": true,
+  "private": false,
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
