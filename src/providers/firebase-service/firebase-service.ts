@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { Usuario } from '../../models/usuario';
-import { Firebase } from '@ionic-native/firebase';
+// import { Firebase } from '@ionic-native/firebase';
 import { AngularFireList } from 'angularfire2/database/interfaces';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -19,7 +19,7 @@ export class FirebaseServiceProvider {
 
   constructor(
     public http: HttpClient,
-    //private _firebase: Firebase,
+    // private _firebase: Firebase,
     public dataBase: AngularFireDatabase
   ) {
     console.log('Hello FirebaseServiceProvider Provider');
@@ -95,10 +95,10 @@ export class FirebaseServiceProvider {
       imagen,
       id_dispositivo
     });
-    //var postId = newPostRef.key; // obtenemos el id único
+    var postId = newPostRef.key; // obtenemos el id único
     // TODO TAJO usuariosRef.child("postId").set(_id: postId);
     // console.log(this._firebase.getValue('usuarios', '4ltcRquTh4zI0XbhkMOE'));
-    // console.log(usuariosRef);
+    console.log(postId); 
     console.log('provider firebase');
   }
 
@@ -109,8 +109,8 @@ export class FirebaseServiceProvider {
   deleteUsuario(usuario){ 
     // mirar removeValue() o setValue() null
     const usuariosRef: firebase.database.Reference = firebase.database().ref('/usuarios/');
-    // var userRef = usuariosRef. child(usuario);
-    
+    var userRef = usuariosRef. child(usuario);
+    console.log(userRef);
   }
 
   getUsuario() {
