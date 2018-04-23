@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BLE } from '@ionic-native/ble';
 import { Observable } from 'rxjs/Observable';
-import { Dispositivo } from '../../models/dispositivo';
+//import { Dispositivo } from '../../models/dispositivo';
 
 /*
   Generated class for the BleServiceProvider provider.
@@ -15,7 +15,7 @@ export class BleServiceProvider {
 
   public dispositivosSalida$: Observable<any[]>; // observable para recuperar los dispositivos que encontramos al escanear
 
-  private dummyData = { 
+  /*private dummyData = { 
     json: function() { 
         return [ { 
             name: 'Battery Demo',
@@ -29,7 +29,7 @@ export class BleServiceProvider {
             rssi: -55 } 
         ]
     }
-  } 
+  } */
 
   constructor(
     public http: HttpClient,

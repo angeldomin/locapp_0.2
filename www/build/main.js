@@ -44,8 +44,7 @@ var HomePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(371);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_firebase__ = __webpack_require__(257);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(258);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(258);
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -67,14 +66,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 /*
   Este service se encargará de las operaciones con la base de datos firebase.
 */
 var FirebaseServiceProvider = /** @class */ (function () {
-    function FirebaseServiceProvider(http, _firebase, dataBase) {
+    function FirebaseServiceProvider(http, 
+        //private _firebase: Firebase,
+        dataBase) {
         this.http = http;
-        this._firebase = _firebase;
         this.dataBase = dataBase;
         console.log('Hello FirebaseServiceProvider Provider');
         __WEBPACK_IMPORTED_MODULE_2_firebase__["auth"]().signInAnonymously().catch(function (error) {
@@ -142,7 +141,7 @@ var FirebaseServiceProvider = /** @class */ (function () {
             imagen: imagen,
             id_dispositivo: id_dispositivo
         });
-        var postId = newPostRef.key; // obtenemos el id único
+        //var postId = newPostRef.key; // obtenemos el id único
         // TODO TAJO usuariosRef.child("postId").set(_id: postId);
         // console.log(this._firebase.getValue('usuarios', '4ltcRquTh4zI0XbhkMOE'));
         // console.log(usuariosRef);
@@ -154,7 +153,7 @@ var FirebaseServiceProvider = /** @class */ (function () {
     FirebaseServiceProvider.prototype.deleteUsuario = function (usuario) {
         // mirar removeValue() o setValue() null
         var usuariosRef = __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref('/usuarios/');
-        var userRef = usuariosRef.child(usuario);
+        // var userRef = usuariosRef. child(usuario);
     };
     FirebaseServiceProvider.prototype.getUsuario = function () {
         // const usuariosRef: firebase.database.Reference = firebase.database().ref('/usuarios/');
@@ -162,11 +161,10 @@ var FirebaseServiceProvider = /** @class */ (function () {
     };
     FirebaseServiceProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_firebase__["a" /* Firebase */],
-            __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _b || Object])
     ], FirebaseServiceProvider);
     return FirebaseServiceProvider;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=firebase-service.js.map
@@ -265,31 +263,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+//import { Dispositivo } from '../../models/dispositivo';
 /*
   Generated class for the BleServiceProvider provider.
 
   Servicio que se encargará de lo relacionado con bluetooth
 */
 var BleServiceProvider = /** @class */ (function () {
+    /*private dummyData = {
+      json: function() {
+          return [ {
+              name: 'Battery Demo',
+              id: '20:FF:D0:FF:D1:C0',
+              advertising: [2,1,6,3,3,15,24,8,9,66,97,116,116,101,114,121],
+              rssi: -55
+          }, {
+              name: 'Battery Demo',
+              id: '20:FF:D0:FF:D1:C0',
+              advertising: [2,1,6,3,3,15,24,8,9,66,97,116,116,101,114,121],
+              rssi: -55 }
+          ]
+      }
+    } */
     function BleServiceProvider(http, _ble) {
         this.http = http;
         this._ble = _ble;
-        this.dummyData = {
-            json: function () {
-                return [{
-                        name: 'Battery Demo',
-                        id: '20:FF:D0:FF:D1:C0',
-                        advertising: [2, 1, 6, 3, 3, 15, 24, 8, 9, 66, 97, 116, 116, 101, 114, 121],
-                        rssi: -55
-                    }, {
-                        name: 'Battery Demo',
-                        id: '20:FF:D0:FF:D1:C0',
-                        advertising: [2, 1, 6, 3, 3, 15, 24, 8, 9, 66, 97, 116, 116, 101, 114, 121],
-                        rssi: -55
-                    }
-                ];
-            }
-        };
         console.log('Hello BleServiceProvider Provider');
         /*
         this.dispositivosSalida$ = [ {
@@ -313,10 +311,10 @@ var BleServiceProvider = /** @class */ (function () {
     };
     BleServiceProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__["a" /* BLE */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__["a" /* BLE */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__["a" /* BLE */]) === "function" && _b || Object])
     ], BleServiceProvider);
     return BleServiceProvider;
+    var _a, _b;
 }());
 
 /* información de: https://ionicframework.com/docs/native/ble/
