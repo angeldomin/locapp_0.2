@@ -1,0 +1,29 @@
+<!--
+  Html correspondiente a la pantalla de registrar nuevo dispositivo
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Dispositivos Bluetooth</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>  
+  <div> <!-- dispositivos registrados anteriormente -->
+    <ion-label>Dispositivos conocidos:</ion-label>
+    <ion-list>
+        <button ion-item *ngFor="let dispositivo of dispositivosConocidos" (click)="registrar(dispositivo)">      
+          {{dispositivo.nombre_dispositivo}} {{dispositivo.descripcion}}      
+        </button>
+    </ion-list>
+  </div>
+  <br><br>
+  <button ion-button (click)="buscar()">Buscar dispositivos Bluetooth</button>
+  <ion-list>
+    <button ion-item *ngFor="let dispositivo of dispositivos" (click)="registrar(dispositivo)">      
+      {{dispositivo.nombre_dispositivo}} {{dispositivo.descripcion}}      
+    </button>
+  </ion-list>
+</ion-content>

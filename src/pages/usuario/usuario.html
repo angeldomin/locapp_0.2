@@ -1,0 +1,39 @@
+<!--
+  Página para dar de alta nuevos usuarios y modificar existentes
+  Aquí relacionaremos un usuario con un dispositivo concreto 
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Usuario</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Nombre</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="usuario.nombre"></ion-input>
+    </ion-item>    
+    <ion-item>
+      <ion-label floating>Primer Apellido</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="usuario.apellido1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Segundo Apellido</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="usuario.apellido2"></ion-input>
+    </ion-item>    
+    <ion-item>
+      <ion-label floating>Edad</ion-label>
+      <ion-input type="number" value="" [(ngModel)]="usuario.edad"></ion-input>
+    </ion-item>
+    <!-- si subimos imagen debe ir en este punto -->
+  </ion-list>    
+  <div padding>
+    <button ion-button color="light" block (click)='asignarDispositivo()'>Asignar Dispositivo</button>
+    <button ion-button color="primary" block (click)='guardar()'>Guardar</button>
+  </div>
+</ion-content>

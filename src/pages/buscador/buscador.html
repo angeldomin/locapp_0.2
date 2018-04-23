@@ -1,0 +1,38 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Buscador</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+      <ion-card-header>
+        {{usuario.nombre}} {{usuario.apellido}}
+      </ion-card-header>
+      <ion-card-content>        
+        Datos relacionados con el usuario enlazado a este dispositivo.
+      </ion-card-content>
+    </ion-card>
+    <div class="ion-canvas">
+      <canvas class="canvascentrado" #canvas></canvas>
+    </div>
+    <button
+      ion-button
+      color="primary"
+      (click)="drawCircle()">
+      Draw circles
+   </button>
+   <button
+      ion-button
+      color="primary"
+      (click)="drawRadar(50)">
+      Draw a Radar
+   </button>
+   
+
+</ion-content>
