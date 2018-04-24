@@ -72,20 +72,8 @@ export class FirebaseServiceProvider {
     const edad = usuario.edad;
     const imagen = usuario.image;
     const id_dispositivo = usuario.id_dispositivo;
-
-    console.log('Probando a añadir nuevo usuario');
     
-    /*usuariosRef.set({
-      _id,
-      nombre,
-      apellido1,
-      apellido2,
-      edad,
-      imagen,
-      id_dispositivo 
-    });*/
-    // mirar aquí https://firebase.google.com/docs/database/admin/save-data
-    // este funciona y en newPostRef guardamos la referencia unica al objeto que guardamos
+    // mirar aquí https://firebase.google.com/docs/database/admin/save-data    
     var newPostRef = usuariosRef.push({
       _id,
       nombre,
@@ -95,11 +83,10 @@ export class FirebaseServiceProvider {
       imagen,
       id_dispositivo
     });
-    var postId = newPostRef.key; // obtenemos el id único
-    // TODO TAJO usuariosRef.child("postId").set(_id: postId);
-    // console.log(this._firebase.getValue('usuarios', '4ltcRquTh4zI0XbhkMOE'));
-    console.log(postId); 
-    console.log('provider firebase');
+
+    // seteamos el id para luego poder buscar con la referencia unica autogenerada
+    newPostRef.child("_id").set(newPostRef.key); 
+    
   }
 
   editUsuario(usuario:Usuario) {
@@ -109,7 +96,7 @@ export class FirebaseServiceProvider {
   deleteUsuario(usuario){ 
     // mirar removeValue() o setValue() null
     const usuariosRef: firebase.database.Reference = firebase.database().ref('/usuarios/');
-    var userRef = usuariosRef. child(usuario);
+    var userRef = usuariosRef. child(usuario._id);
     console.log(userRef);
   }
 

@@ -36,6 +36,10 @@ export class ListPage {
     this.navCtrl.push(BuscadorPage, {usuario: usuario, mode: 'edit'});
   }
 
+  borrar(usuario) {
+    this._firebaseService.deleteUsuario(usuario);
+  }
+
   nuevoUsuario() {
     this.navCtrl.push(UsuarioPage, {});
   }
