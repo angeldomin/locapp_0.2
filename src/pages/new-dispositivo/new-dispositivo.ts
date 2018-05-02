@@ -61,10 +61,11 @@ export class NewDispositivoPage {
     this._bleService.scan();
     
     // nos suscribimos a observable de dispositivos, la lista de dispositivos que encuentra
+    /*
     this.dispositivosRef = this._bleService.dispositivosSalida$.subscribe(response => {
         console.log(response);
       this.dispositivos = response;
-    })
+    })*/
     
     
 
