@@ -48,13 +48,14 @@ export class BleServiceProvider {
         advertising: [2,1,6,3,3,15,24,8,9,66,97,116,116,101,114,121],
         rssi: -55 } 
     ];*/
-    this.dispositivosSalida$ = null;  
+    this.dispositivosSalida$ = new Observable;  
   }
   
 
   scan() { // sin probar de momento
     this._ble.scan([], 5).subscribe(response => {
       this.dispositivosSalida$ = response;
+      console.log(response);
     })  
   }
 
