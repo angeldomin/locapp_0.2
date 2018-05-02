@@ -14,12 +14,12 @@
       <button ion-button class="btnLink">
           <ion-icon name="link"></ion-icon>
       </button>
-      <button ion-button color="light" class="btnOptions">
+      <button ion-button color="light" class="btnOptions" (click)="editar(usuario)">
         <ion-icon name="options"></ion-icon>
       </button>
       <button ion-button color="danger" class="btnRemove" (click)="borrar(usuario)">
         <ion-icon name="remove"></ion-icon>
-      </button> 
+      </button>
     </div>
   </ion-list>
   <div padding>

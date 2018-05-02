@@ -89,8 +89,11 @@ export class FirebaseServiceProvider {
     
   }
 
-  editUsuario(usuario:Usuario) {
-    // mirar a ver si se hace con set
+  editUsuario(usuario:Usuario) {    
+    console.log('editamos usuario');
+    const usuariosRef: firebase.database.Reference = firebase.database().ref('/usuarios/');
+    var userRef = usuariosRef. child(usuario._id);
+    userRef.set(usuario);
   }
 
   deleteUsuario(usuario){ 
