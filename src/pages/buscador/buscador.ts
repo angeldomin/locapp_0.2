@@ -126,6 +126,7 @@ export class BuscadorPage {
       arco_actual--;
     }
 
+    /*
     // o bien metemos aquí la lógica de señalar si vamos en buena dirección o la pasamos a otro sitio
     this._CONTEXT.beginPath();
     this._CONTEXT.moveTo(this._CANVAS.width/2, this._CANVAS.height/2);
@@ -138,7 +139,7 @@ export class BuscadorPage {
     this._CONTEXT.lineWidth = 15;
     this._CONTEXT.strokeStyle = '#c82124';
     this._CONTEXT.stroke(); 
-    this._CONTEXT.closePath();
+    this._CONTEXT.closePath();*/
   }
 
 }

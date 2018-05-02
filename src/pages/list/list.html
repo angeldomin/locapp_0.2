@@ -9,18 +9,27 @@
 
 <ion-content> 
   <ion-list>
-    <button ion-item *ngFor="let usuario of usuarios" (click)="seleccionar(usuario)">
-      {{usuario.nombre}} {{usuario.apellido1}}      
-    </button>
+    <div class="divUsuario" ion-item *ngFor="let usuario of usuarios" (click)="seleccionar(usuario)">      
+      <label class="labelUsuario">{{usuario.nombre}} {{usuario.apellido1}}</label>     
+      <button ion-button class="btnLink">
+          <ion-icon name="link"></ion-icon>
+      </button>
+      <button ion-button color="light" class="btnOptions">
+        <ion-icon name="options"></ion-icon>
+      </button>
+      <button ion-button color="danger" class="btnRemove" (click)="borrar(usuario)">
+        <ion-icon name="remove"></ion-icon>
+      </button> 
+    </div>
   </ion-list>
   <div padding>
     <button ion-button block (click)="nuevoUsuario()">
       Nuevo usuario
     </button>
-  </div>  
+  </div>
   <div *ngIf="selectedUser" padding>
     Has seleccionado el usuario <b>{{selectedUser.nombre}}</b>
-    <button ion-button (click)="buscar(selectedUser)">
+    <button ion-button block color="dark" (click)="buscar(selectedUser)">
       Iniciar búsqueda
     </button>
   </div>
