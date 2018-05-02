@@ -57,13 +57,17 @@ export class NewDispositivoPage {
     this.dispositivos.push( new Dispositivo('ID04', '000000003', 'Dispositivo 3', 'Dispositivo simulado 3') );
     // verdadero 
 
+
+    this._bleService.scan();
+    
     // nos suscribimos a observable de dispositivos, la lista de dispositivos que encuentra
     /*
     this.dispositivosRef = this._bleService.dispositivosSalida$.subscribe(response => {
+        console.log(response);
       this.dispositivos = response;
     })*/
     
-    this._bleService.scan();
+    
 
     
   }

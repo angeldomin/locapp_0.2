@@ -97,6 +97,7 @@ export class FirebaseServiceProvider {
     // mirar removeValue() o setValue() null
     const usuariosRef: firebase.database.Reference = firebase.database().ref('/usuarios/');
     var userRef = usuariosRef. child(usuario._id);
+    userRef.set(null);
     console.log(userRef);
   }
 

@@ -12,10 +12,10 @@
 <ion-content padding>
     <ion-card>
       <ion-card-header>
-        {{usuario.nombre}} {{usuario.apellido}}
+        {{usuario.nombre}} {{usuario.apellido1}}
       </ion-card-header>
       <ion-card-content>        
-        Datos relacionados con el usuario enlazado a este dispositivo.
+        Edad: {{usuario.edad}}
       </ion-card-content>
     </ion-card>
     <div class="ion-canvas">
@@ -24,7 +24,7 @@
     <button
       ion-button
       color="primary"
-      (click)="drawCircle()">
+      (click)="drawRadar(100)">
       Draw circles
    </button>
    <button
