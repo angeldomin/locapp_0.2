@@ -23,7 +23,6 @@ export class ListPage {
               private alertCtrl: AlertController
             ) {
 
-    // traemos de base de datos la lista de usuarios registrados
     // nos suscribimos a observable de usuarios, la lista de usuarios guardados en base de datos
     this.usuariosRef = this._firebaseService.usuariosSalida$.subscribe(response => {
       this.usuarios = response;

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Profesional } from '../../models/profesional';
+import { FirebaseServiceProvider } from '../../providers/firebase-service/firebase-service';
 
 @IonicPage()
 @Component({
@@ -14,6 +15,7 @@ export class SuAltaEditPage {
 
   constructor(
     public navCtrl: NavController,
+    public _firebaseService: FirebaseServiceProvider,
     public navParams: NavParams
   ) {
 
@@ -34,13 +36,11 @@ export class SuAltaEditPage {
     console.log('ionViewDidLoad SuAltaEditPage');
   }
 
-  guardar(profesional: Profesional) {
-    if (this.modo === 'new') {
-      console.log('Guardar nuevo profesional');
-      // firebaseService.nuevoProfesional(profesional)
+  guardar() {
+    if (this.modo === 'new') {      
+      this._firebaseService.newProfesional(this.profesional);      
     } else if (this.modo === 'edit') {
-      console.log('Editar profesional')
-      // firebaseService.editarProfesional(profesional)
+      this._firebaseService.editProfesional(this.profesional);      
     } else {
       console.log('Error al guardar profesional, modo no definido')
       // error al guardar

@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Profesional } from '../../models/profesional';
 import 'rxjs/add/operator/debounceTime';
 import { FormControl } from '@angular/forms';
+import { SuAltaEditPage } from '../su-alta-edit/su-alta-edit';
+import { FirebaseServiceProvider } from '../../providers/firebase-service/firebase-service';
+import { Subscription } from 'rxjs/Subscription';
 
 @IonicPage()
 @Component({
@@ -13,14 +16,21 @@ export class SuListadoProfesionalesPage {
 
   searchTerm: string = '';
   searchControl: FormControl;
-  profesionales: Profesional[];
+  profesionales: Profesional[];  
+  profesionalesRef: Subscription;
   searching: any = false;
 
   constructor(
     public navCtrl: NavController,
+    public _firebaseService: FirebaseServiceProvider,
     public navParams: NavParams
   ) {
     this.searchControl = new FormControl();
+
+    // nos suscribimos a observable de profesionales, la lista de profesionales guardados en base de datos
+    this.profesionalesRef = this._firebaseService.profesionalesSalida$.subscribe(response => {
+      this.profesionales = response;
+    })
   }
 
   ionViewDidLoad() {
@@ -48,13 +58,12 @@ export class SuListadoProfesionalesPage {
   }
 
   editar(profesional: Profesional) {
-    // navegamos a pantalla su-alta-edit en modo edit
-    // toast aviso actualizado correctamente
+    this.navCtrl.push(SuAltaEditPage, {mode: 'edit'}) // navegamos a pantalla su-alta-edit en modo edit    
   }
 
   borrar(profesional: Profesional) {
     // ventana de confirmacion y dentro:
-    // firebaseService.deleteProfesional(profesional)
+    this._firebaseService.deleteProfesional(profesional);   
     // aviso borrado correcto
   }
 

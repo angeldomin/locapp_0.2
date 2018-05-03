@@ -6,6 +6,7 @@ import { Usuario } from '../../models/usuario';
 import { AngularFireList } from 'angularfire2/database/interfaces';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+import { Profesional } from '../../models/profesional';
 
 /*  
   Este service se encargará de las operaciones con la base de datos firebase.
@@ -16,6 +17,9 @@ export class FirebaseServiceProvider {
 
   usuariosRef: AngularFireList<any>;
   usuariosSalida$: Observable<any[]>;
+
+  profesionalesRef: AngularFireList<any>;
+  profesionalesSalida$: Observable<any[]>;
 
   constructor(
     public http: HttpClient,
@@ -56,6 +60,11 @@ export class FirebaseServiceProvider {
 
     this.usuariosRef = this.dataBase.list('/usuarios/');
     this.usuariosSalida$ = this.usuariosRef.snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
+
+    this.profesionalesRef = this.dataBase.list('/profesionales/');
+    this.profesionalesSalida$ = this.profesionalesRef.snapshotChanges().map(changes => {
       return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
 
@@ -106,34 +115,42 @@ export class FirebaseServiceProvider {
 
   getUsuario() {
     // const usuariosRef: firebase.database.Reference = firebase.database().ref('/usuarios/');
-    // console.log(usuariosRef.toJSON);
-   
+    // console.log(usuariosRef.toJSON);   
   }
 
-  /*
-Temas por hacer:
+  newProfesional(profesional: Profesional) {        
+    const profesionalesRef: firebase.database.Reference = firebase.database().ref('/profesionales/');
+    const _id = profesional._id;
+    const nombre = profesional.nombre;
+    const apellido1 = profesional.apellido1;
+    const apellido2 = profesional.apellido2;
+    const user = profesional.user;
+    const pass = profesional.pass;
 
-- Generar apk o buscar método para probarlo en el movil
-- Terminar la busqueda de dispositivos y comprobarla 
-(necesitamos bluetooth así que necesitamos apk o manera de probarlo en movil para esto)
-- Preparar aviso cuando se separe cierta distancia
-- Hacer página de configurar distancia para el aviso
-- Implementar borrado de usuario de base de datos
-- Implementar edición de usuario
-- Textos en literales para cambio de idioma etc
-- Mostrar mensaje de todo ok cuando damos de alta nuevo usuario porque redirije al inicio 
-y no sabemos si ha ido bien -> Con Alert puede quedar bien
+    var newPostRef = profesionalesRef.push({
+      _id,
+      nombre,
+      apellido1,
+      apellido2,
+      user,
+      pass
+    });
 
+    newPostRef.child("_id").set(newPostRef.key);     
+  }
 
-Dudas:
+  editProfesional(profesional: Profesional) {    
+    console.log('editamos profesional');
+    const profesionalesRef: firebase.database.Reference = firebase.database().ref('/profesionales/');
+    var profesionalRef = profesionalesRef. child(profesional._id);
+    profesionalRef.set(profesional);
+  }
 
-- ¿En la pantalla de inicio que queremos que aparezca?
-
-- ¿Que datos serán necesarios de los usuarios (niños)? 
-Para saber que quetenemos que guardar en base de  datos y recuperar en los registros.
-
-- Colores, diseño, etc. ¿lo hago como yo vea?
-  */
-
+  deleteProfesional(profesional: Profesional){     
+    const profesionalesRef: firebase.database.Reference = firebase.database().ref('/profesionales/');
+    var profesionalRef = profesionalesRef. child(profesional._id);
+    profesionalRef.set(null);
+    console.log(profesionalRef);
+  }
   
 } 

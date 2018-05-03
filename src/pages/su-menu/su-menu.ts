@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SuAltaEditPage } from '../su-alta-edit/su-alta-edit';
+import { SuListadoProfesionalesPage } from '../su-listado-profesionales/su-listado-profesionales';
 
 /**
  * Generated class for the SuMenuPage page.
@@ -22,14 +24,12 @@ export class SuMenuPage {
     console.log('ionViewDidLoad SuMenuPage');
   }
 
-  alta() {
-    console.log('alta');
-    // redirigimos a pantalla de profesional en modo new
+  alta() {        
+    this.navCtrl.push(SuAltaEditPage, {mode: 'new'}) // redirigimos a pantalla de profesional en modo new
   }
 
-  edicion() {
-    console.log('edicion');
-    // redirigimos a listado de profesionales donde se podrá editar o borrar
+  edicion() {    
+    this.navCtrl.push(SuListadoProfesionalesPage); // redirigimos a listado de profesionales donde se podrá editar o borrar
   }
 
   salir() {
