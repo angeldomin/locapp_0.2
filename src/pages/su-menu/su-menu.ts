@@ -24,17 +24,16 @@ export class SuMenuPage {
 
   alta() {
     console.log('alta');
+    // redirigimos a pantalla de profesional en modo new
   }
 
   edicion() {
     console.log('edicion');
-  }
-
-  borrado() {
-    console.log('borrado');
+    // redirigimos a listado de profesionales donde se podrá editar o borrar
   }
 
   salir() {
     console.log('salir');
+    // redirigimos a la pantalla de login
   }
 }
