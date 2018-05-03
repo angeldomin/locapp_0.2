@@ -14,9 +14,10 @@ export class SuListadoProfesionalesPage {
   searchTerm: string = '';
   searchControl: FormControl;
   profesionales: Profesional[];
+  searching: any = false;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams
   ) {
     this.searchControl = new FormControl();
@@ -26,8 +27,13 @@ export class SuListadoProfesionalesPage {
     console.log('ionViewDidLoad SuListadoProfesionalesPage');
     this.buscarProfesionales();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.searching = false;
       this.buscarProfesionales();
     })
+  }
+
+  onSearchInput() {
+    this.searching = true;
   }
 
   buscarProfesionales() {

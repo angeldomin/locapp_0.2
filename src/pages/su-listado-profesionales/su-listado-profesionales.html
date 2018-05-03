@@ -5,7 +5,10 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()"></ion-searchbar>
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
   <ion-list>
     <div class="divProfesional" ion-item *ngFor="let profesional of profesionales">      
       <label class="labelProfesional">{{profesional.nombre}} {{profesional.apellido1}}</label>
