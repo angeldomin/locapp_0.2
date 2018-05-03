@@ -22,6 +22,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { BleServiceProvider } from '../providers/ble-service/ble-service';
+import { SuMenuPage } from '../pages/su-menu/su-menu';
 
 // configuracion de la base de datos proporcionada por mi firebase
 export const firebaseConfig = {
@@ -40,7 +41,8 @@ firebase.initializeApp(firebaseConfig);
     ListPage,
     BuscadorPage,
     NewDispositivoPage,
-    UsuarioPage
+    UsuarioPage,
+    SuMenuPage
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
@@ -57,7 +59,8 @@ firebase.initializeApp(firebaseConfig);
     ListPage,
     BuscadorPage,
     NewDispositivoPage,
-    UsuarioPage
+    UsuarioPage,
+    SuMenuPage
   ],
   providers: [
     StatusBar,

@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { BuscadorPage } from '../pages/buscador/buscador';
 import { NewDispositivoPage } from '../pages/new-dispositivo/new-dispositivo';
 import { UsuarioPage } from '../pages/usuario/usuario';
+import { SuMenuPage } from '../pages/su-menu/su-menu';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,7 +28,8 @@ export class MyApp {
       { title: 'Nuevo Usuario', component: UsuarioPage },
       { title: 'Usuarios', component: ListPage },
       { title: 'Dispositivos', component: NewDispositivoPage },
-      { title: 'Buscador', component: BuscadorPage }      
+      { title: 'Buscador', component: BuscadorPage },
+      { title: 'SU_MENU', component: SuMenuPage }     
     ];
 
   }
