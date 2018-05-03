@@ -6,11 +6,11 @@
 
 <ion-content padding>
   <div class="opcionesSu">
-    <button ion-button block color="light">Alta cuenta nueva</button>
-    <button ion-button block color="light">Edicion de cuenta</button>
-    <button ion-button block color="light">Borrar cuenta</button>
+    <button ion-button block color="light" (click)='alta()'>Alta cuenta nueva</button>
+    <button ion-button block color="light" (click)='edicion()'>Edicion de cuenta</button>
+    <button ion-button block color="light" (click)='borrado()'>Borrar cuenta</button>
   </div>
   <div class="divFoot">
-    <button ion-button color="light">Salir</button>
+    <button ion-button color="light" (click)='salir()'>Salir</button>
   </div>
 </ion-content>

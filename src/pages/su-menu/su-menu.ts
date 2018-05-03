@@ -22,4 +22,19 @@ export class SuMenuPage {
     console.log('ionViewDidLoad SuMenuPage');
   }
 
+  alta() {
+    console.log('alta');
+  }
+
+  edicion() {
+    console.log('edicion');
+  }
+
+  borrado() {
+    console.log('borrado');
+  }
+
+  salir() {
+    console.log('salir');
+  }
 }
