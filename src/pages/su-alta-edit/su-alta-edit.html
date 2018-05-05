@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Alta/Edicion</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Nombre</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="profesional.nombre"></ion-input>
+    </ion-item>    
+    <ion-item>
+      <ion-label floating>Primer Apellido</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="profesional.apellido1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Segundo Apellido</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="profesional.apellido2"></ion-input>
+    </ion-item>    
+    <ion-item>
+      <ion-label floating>Usuario</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="profesional.user"></ion-input>
+    </ion-item> 
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="profesional.pass"></ion-input>
+    </ion-item>  
+  </ion-list>    
+  <div padding>
+    <button ion-button color="light" block (click)='guardar()'>Confirmar</button>
+    <button ion-button color="primary" block class="btnVolver" (click)='volver()'>Volver al menú</button>
+  </div>
+</ion-content>

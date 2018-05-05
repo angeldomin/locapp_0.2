@@ -34,17 +34,8 @@ export class BuscadorPage {
       this.usuario = navParams.get('usuario');
     } else {
       this.usuario = new Usuario('', '', '', '', 0, '', '');
-    }
-
-    if (navParams.get('mode')) {
-      this.modo = navParams.get('mode');
-    } else {
-      this.modo = '';
-    }
+    }    
     
-    
-    console.log('Usuario: ', this.usuario);
-    console.log('Modo: ',this.modo);
   }
 
   ionViewDidLoad() {    

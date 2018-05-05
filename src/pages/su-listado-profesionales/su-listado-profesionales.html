@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Lista de profesionales</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()"></ion-searchbar>
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-list>
+    <div class="divProfesional" ion-item *ngFor="let profesional of profesionales">      
+      <label class="labelProfesional">{{profesional.nombre}} {{profesional.apellido1}}</label>
+      <button ion-button color="light" class="btnOptions" (click)="editar(profesional)">
+        <ion-icon name="options"></ion-icon>
+      </button>
+      <button ion-button color="danger" class="btnRemove" (click)="borrar(profesional)">
+        <ion-icon name="remove"></ion-icon>
+      </button>
+    </div>   
+  </ion-list>
+  <div padding>      
+    <button ion-button color="primary" block class="btnVolver" (click)='volver()'>Volver al menú</button>
+  </div>
+</ion-content>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NewDispositivoPage } from '../new-dispositivo/new-dispositivo';
 import { Usuario } from '../../models/usuario';
-import { HomePage } from '../../pages/home/home';
+// import { HomePage } from '../../pages/home/home';
 import { FirebaseServiceProvider } from '../../providers/firebase-service/firebase-service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
@@ -22,6 +22,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 export class UsuarioPage {
 
   public usuario : Usuario;
+  public modo : String;
 
   constructor(
     public navCtrl: NavController,
@@ -29,9 +30,17 @@ export class UsuarioPage {
     public _firebaseService: FirebaseServiceProvider,
     private alertCtrl: AlertController
   ) {
-    // si estamos en modo new inicializamos el usuario
-    this.usuario = new Usuario('', '', '', '', 0, '', '');
-    // si es edit los datos del usuario los tendremos, o bien pasados directamente o a partir por ejemplo del id buscar el resto de base de datos
+    if (navParams.get('usuario')) {
+      this.usuario = navParams.get('usuario');
+    } else {
+      this.usuario = new Usuario('', '', '', '', 0, '', '');
+    }
+    if (navParams.get('mode')) {
+      this.modo = navParams.get('mode');
+    } else {
+      this.modo = '';
+    }
+    
   }
 
   ionViewDidLoad() {
@@ -43,8 +52,9 @@ export class UsuarioPage {
     this._firebaseService.newUsuario(usuario);
   }
 
-  editUser() {
+  editUser(usuario: Usuario) {
     // editamos los datos de un usuario existente 
+    this._firebaseService.editUsuario(usuario);
   }
 
   myCallbackFunction = function(_params) {
@@ -66,13 +76,19 @@ export class UsuarioPage {
     this.usuario.id_dispositivo = '';
   }
 
-  // guardamos los datos en bbdd y navegamos a inicio
+  // guardamos los datos en bbdd y navegamos 
   guardar() {    
-    console.log('TODO Guardamos el usuario ', this.usuario);
-    this.newUser(this.usuario);
-    this.presentAlert();
-    this.navCtrl.setRoot(HomePage);
-    this.navCtrl.goToRoot;    
+    console.log('Guardamos el usuario -> ', this.usuario);
+    if (this.modo === 'edit') {
+      this.editUser(this.usuario);
+      this.navCtrl.pop();
+    } else {
+      this.newUser(this.usuario);
+      this.presentAlert();
+      this.navCtrl.pop();
+    }    
+    // this.navCtrl.setRoot(HomePage); a inicio
+    // this.navCtrl.goToRoot;    a inicio
   }
 
   // alert de aviso de nuevo usuario

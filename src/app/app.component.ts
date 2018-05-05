@@ -9,6 +9,9 @@ import { BuscadorPage } from '../pages/buscador/buscador';
 import { NewDispositivoPage } from '../pages/new-dispositivo/new-dispositivo';
 import { UsuarioPage } from '../pages/usuario/usuario';
 import { LoginPage } from '../pages/login/login';
+import { SuMenuPage } from '../pages/su-menu/su-menu';
+import { SuAltaEditPage } from '../pages/su-alta-edit/su-alta-edit';
+import { SuListadoProfesionalesPage } from '../pages/su-listado-profesionales/su-listado-profesionales';
 
 @Component({
   templateUrl: 'app.html'
@@ -30,6 +33,9 @@ export class MyApp {
       { title: 'Dispositivos', component: NewDispositivoPage },
       { title: 'Buscador', component: BuscadorPage },
       { title: 'Login', component: LoginPage },
+      { title: 'SU_MENU', component: SuMenuPage },
+      { title: 'SU_ALTA_EDIT', component: SuAltaEditPage },
+      { title: 'SU_LISTA_PROF', component: SuListadoProfesionalesPage }
     ];
 
   }
