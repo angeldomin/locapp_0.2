@@ -22,6 +22,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { BleServiceProvider } from '../providers/ble-service/ble-service';
+import { LoginPage } from '../pages/login/login';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 // configuracion de la base de datos proporcionada por mi firebase
 export const firebaseConfig = {
@@ -40,7 +42,8 @@ firebase.initializeApp(firebaseConfig);
     ListPage,
     BuscadorPage,
     NewDispositivoPage,
-    UsuarioPage
+    UsuarioPage,
+    LoginPage
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
@@ -57,12 +60,14 @@ firebase.initializeApp(firebaseConfig);
     ListPage,
     BuscadorPage,
     NewDispositivoPage,
-    UsuarioPage
+    UsuarioPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Firebase,
+    AngularFireAuth,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseServiceProvider,
     BLE,
