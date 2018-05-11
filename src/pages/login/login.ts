@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { SuMenuPage } from '../su-menu/su-menu';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -37,10 +39,13 @@ export class LoginPage {
 
   loginUser(){  
     this.afAuth.auth.signInWithEmailAndPassword(this.myForm.value.usuario+'@locapp.com', this.myForm.value.password).then(() => {
-      console.log("User logging");
-      // si el usuario es el SU navegamos a su menú
-      // si el usuario no es el SU vamos a la aplicacion normal
-      this.navCtrl.setRoot('HomePage');
+      console.log("User logging");      
+      if (this.myForm.value.usuario === 'super') { // si el usuario es el SU navegamos a su menú
+        this.navCtrl.push(SuMenuPage);
+      } else { // si el usuario no es el SU vamos a la aplicacion normal
+        this.navCtrl.push(HomePage);
+      }
+      // this.navCtrl.setRoot('HomePage');
     }, (err) => {
       this.loading.dismiss().then( () => {
         let alert = this.alertCtrl.create({

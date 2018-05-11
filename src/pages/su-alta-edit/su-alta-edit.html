@@ -5,30 +5,40 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label floating>Nombre</ion-label>
-      <ion-input type="text" value="" [(ngModel)]="profesional.nombre"></ion-input>
-    </ion-item>    
-    <ion-item>
-      <ion-label floating>Primer Apellido</ion-label>
-      <ion-input type="text" value="" [(ngModel)]="profesional.apellido1"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Segundo Apellido</ion-label>
-      <ion-input type="text" value="" [(ngModel)]="profesional.apellido2"></ion-input>
-    </ion-item>    
-    <ion-item>
-      <ion-label floating>Usuario</ion-label>
-      <ion-input type="text" value="" [(ngModel)]="profesional.user"></ion-input>
-    </ion-item> 
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="text" value="" [(ngModel)]="profesional.pass"></ion-input>
-    </ion-item>  
-  </ion-list>    
-  <div padding>
-    <button ion-button color="light" block (click)='guardar()'>Confirmar</button>
-    <button ion-button color="primary" block class="btnVolver" (click)='volver()'>Volver al menú</button>
+  <div *ngIf="modo == 'edit'">
+    <ion-title>Edición de profesional</ion-title>
+  </div>
+  <div *ngIf="modo == 'new'">
+    <ion-title>Alta nueva de profesional</ion-title>
+  </div>
+  <form [formGroup]="profesionalForm" (ngSubmit)="guardar()">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Nombre</ion-label>        
+        <ion-input formControlName="nombre" type="text" [(ngModel)]="profesional.nombre"></ion-input>
+      </ion-item>    
+      <ion-item>
+        <ion-label floating>Primer Apellido</ion-label>
+        <ion-input formControlName="apellido1" type="text" [(ngModel)]="profesional.apellido1"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Segundo Apellido</ion-label>
+        <ion-input formControlName="apellido2" type="text" [(ngModel)]="profesional.apellido2"></ion-input>
+      </ion-item>    
+      <ion-item>
+        <ion-label floating>Usuario</ion-label>
+        <ion-input [disabled]="isEdit" formControlName="usuario" type="text" [(ngModel)]="profesional.user"></ion-input>
+      </ion-item> 
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input [disabled]="isEdit" formControlName="password" type="password" [(ngModel)]="profesional.pass"></ion-input>
+      </ion-item>  
+    </ion-list>    
+    <div padding>
+      <button ion-button color="light" block type="submit" [disabled]="!profesionalForm.valid">Confirmar</button>
+    </div>
+  </form>
+  <div padding>      
+    <button ion-button color="primary" block class="btnVolver" (click)='volver()'>Cancelar</button>
   </div>
 </ion-content>

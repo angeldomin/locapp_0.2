@@ -34,6 +34,6 @@ export class SuMenuPage {
 
   salir() {
     console.log('salir');
-    // redirigimos a la pantalla de login
+    this.navCtrl.pop();
   }
 }

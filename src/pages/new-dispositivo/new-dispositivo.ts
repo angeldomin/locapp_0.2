@@ -51,21 +51,23 @@ export class NewDispositivoPage {
 
   buscar() {
     // simulado
-    this.dispositivos = [ new Dispositivo ('ID01', '000000000', 'Dispositivo 0', 'Dispositivo simulado 0')];
-    this.dispositivos.push( new Dispositivo('ID02', '000000001', 'Dispositivo 1', 'Dispositivo simulado 1') );
-    this.dispositivos.push( new Dispositivo('ID03', '000000002', 'Dispositivo 2', 'Dispositivo simulado 2') );
-    this.dispositivos.push( new Dispositivo('ID04', '000000003', 'Dispositivo 3', 'Dispositivo simulado 3') );
-    // verdadero 
-
-
+    // this.dispositivos = [ new Dispositivo ('ID01', '000000000', 'Dispositivo 0', 'Dispositivo simulado 0')];
+    // this.dispositivos.push( new Dispositivo('ID02', '000000001', 'Dispositivo 1', 'Dispositivo simulado 1') );
+    // this.dispositivos.push( new Dispositivo('ID03', '000000002', 'Dispositivo 2', 'Dispositivo simulado 2') );
+    // this.dispositivos.push( new Dispositivo('ID04', '000000003', 'Dispositivo 3', 'Dispositivo simulado 3') );
+    // verdadero  
+    console.log('estamos en buscar');
     this._bleService.scan();
     
-    // nos suscribimos a observable de dispositivos, la lista de dispositivos que encuentra
-    /*
-    this.dispositivosRef = this._bleService.dispositivosSalida$.subscribe(response => {
+    // nos suscribimos a observable de dispositivos, la lista de dispositivos que encuentra  
+    let TIME_IN_MS = 5000;
+    //setTimeout( () => {
+      this.dispositivosRef = this._bleService.dispositivosSalida$.subscribe(response => {
         console.log(response);
-      this.dispositivos = response;
-    })*/
+        this.dispositivos = response;
+      })
+    //}, TIME_IN_MS);  
+   
     
     
 

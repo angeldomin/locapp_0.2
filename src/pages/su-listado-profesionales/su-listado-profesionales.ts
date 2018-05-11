@@ -48,17 +48,11 @@ export class SuListadoProfesionalesPage {
 
   buscarProfesionales() {
     // firebaseService.getListaProfesionales(seachTerm)
-
-    // simulado
-    this.profesionales = [
-      new Profesional('', 'P1', 'AP1', 'AP2', 'USER', 'PASS1'),
-      new Profesional('', 'P2', 'AP12', 'AP22', 'USER2', 'PASS2'),
-      new Profesional('', 'P3', 'AP13', 'AP23', 'USER3', 'PASS3')
-    ]
+    // TODO
   }
 
   editar(profesional: Profesional) {
-    this.navCtrl.push(SuAltaEditPage, {mode: 'edit'}) // navegamos a pantalla su-alta-edit en modo edit    
+    this.navCtrl.push(SuAltaEditPage, {profesional: profesional, mode: 'edit'}) // navegamos a pantalla su-alta-edit en modo edit    
   }
 
   borrar(profesional: Profesional) {
@@ -68,7 +62,7 @@ export class SuListadoProfesionalesPage {
   }
 
   volver() {
-    // regresar a pantalla anterior, menu de superusuario
+    this.navCtrl.pop();
   }
 
 }

@@ -53,7 +53,8 @@ export class BleServiceProvider {
   
 
   scan() { // sin probar de momento
-    this._ble.scan([], 5).subscribe(response => {
+    console.log('escaneando');
+    this._ble.scan([], 5).subscribe(response => {    
       this.dispositivosSalida$ = response;
       console.log(response);
     })  
