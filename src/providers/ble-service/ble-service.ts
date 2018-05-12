@@ -1,65 +1,40 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BLE } from '@ionic-native/ble';
+import { Dispositivo } from '../../models/dispositivo';
+import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
-//import { Dispositivo } from '../../models/dispositivo';
-
-/*
-  Generated class for the BleServiceProvider provider.
-
-  Servicio que se encargará de lo relacionado con bluetooth
-*/
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class BleServiceProvider {
 
-  public dispositivosSalida$: Observable<any[]>; // observable para recuperar los dispositivos que encontramos al escanear
+    // public dispositivosSalida$: Observable<any[]>; // observable para recuperar los dispositivos que encontramos al escanear
+    public dispositivosSalida: Dispositivo[];
 
-  /*private dummyData = { 
-    json: function() { 
-        return [ { 
-            name: 'Battery Demo',
-            id: '20:FF:D0:FF:D1:C0',
-            advertising: [2,1,6,3,3,15,24,8,9,66,97,116,116,101,114,121],
-            rssi: -55
-        }, { 
-            name: 'Battery Demo',
-            id: '20:FF:D0:FF:D1:C0',
-            advertising: [2,1,6,3,3,15,24,8,9,66,97,116,116,101,114,121],
-            rssi: -55 } 
-        ]
-    }
-  } */
+    public dispositivosSalida$ = new Subject<Dispositivo[]>();
 
   constructor(
     public http: HttpClient,
     private _ble: BLE
   ) {
-    console.log('Hello BleServiceProvider Provider');   
-    /*
-    this.dispositivosSalida$ = [ {
-        name: 'Battery Demo',
-        id: '20:FF:D0:FF:D1:C0',
-        advertising: [2,1,6,3,3,15,24,8,9,66,97,116,116,101,114,121],
-        rssi: -55
-    }, { 
-        name: 'Battery Demo',
-        id: '20:FF:D0:FF:D1:C0',
-        advertising: [2,1,6,3,3,15,24,8,9,66,97,116,116,101,114,121],
-        rssi: -55 } 
-    ];*/
-    this.dispositivosSalida$ = new Observable;  
-  }
-  
+    this.dispositivosSalida = [];
+  }  
 
-  scan() { // sin probar de momento
-    console.log('escaneando');
-    this._ble.scan([], 5).subscribe(response => {    
-      this.dispositivosSalida$ = response;
-      console.log(response);
-    })  
+  scan() {
+    console.log('escaneando'); this.dispositivosSalida = [];
+    this._ble.scan([], 20).subscribe(response => {
+        debugger;      
+        this.dispositivosSalida.push(new Dispositivo('', response.id, response.name, ''));
+        this.dispositivosSalida$.next(this.dispositivosSalida);  
+        console.log(this.dispositivosSalida);      
+    }); // console.log(this.dispositivosSalida , 'hola');
   }
 
+  getClientes$(): Observable<Dispositivo[]> {
+    return this.dispositivosSalida$.asObservable();
+  }
+ 
 }
 
 

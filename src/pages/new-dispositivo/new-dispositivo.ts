@@ -4,6 +4,8 @@ import { Dispositivo } from '../../models/dispositivo'
 import { Usuario } from '../../models/usuario';
 import { Subscription } from 'rxjs/Subscription';
 import { BleServiceProvider } from '../../providers/ble-service/ble-service';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 /**
  * Generated class for the NewDispositivoPage page.
@@ -24,17 +26,35 @@ export class NewDispositivoPage {
   callback;
   dispositivosRef: Subscription;
 
+  dispositivos$: Observable<Dispositivo[]>;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     private _bleService: BleServiceProvider
   ) {    
-    
+    this.dispositivos = [];
   }
+
+      /**/
 
   ionViewDidLoad() {    
     this.usuario = this.navParams.get('usuario');
     this.callback = this.navParams.get('callback');
+/*
+    this.dispositivosRef = this._bleService.dispositivosSalida$.subscribe(response => {
+      console.log(response);
+      this.dispositivos = response;
+    })*/
+
+    // this.dispositivos$ = this._bleService.getClientes$();
+    // this.dispositivos$.subscribe(dispositivos => this.dispositivos = dispositivos);
+    this.dispositivosRef = this._bleService.dispositivosSalida$.subscribe(response => {
+      debugger;
+      this.dispositivos = response;
+    });
+    
+         
 
     /* Buscamos dispositivos guardados anteriormente.
       puede que tengamos que diferenciar los que están asignados de los que no y mostrar algo distinto (color o icono) 
@@ -49,6 +69,12 @@ export class NewDispositivoPage {
         
   }
 
+  hola() {
+    // console.log('Estamos en  bussdafdsfcar', this._bleService.dispositivosSalida);
+    // this.dispositivos = this._bleService.dispositivosSalida;
+    console.log(this.dispositivos);
+  }
+
   buscar() {
     // simulado
     // this.dispositivos = [ new Dispositivo ('ID01', '000000000', 'Dispositivo 0', 'Dispositivo simulado 0')];
@@ -56,18 +82,8 @@ export class NewDispositivoPage {
     // this.dispositivos.push( new Dispositivo('ID03', '000000002', 'Dispositivo 2', 'Dispositivo simulado 2') );
     // this.dispositivos.push( new Dispositivo('ID04', '000000003', 'Dispositivo 3', 'Dispositivo simulado 3') );
     // verdadero  
-    console.log('estamos en buscar');
+    // console.log('estamos en buscar', this._bleService.dispositivosSalida$);
     this._bleService.scan();
-    
-    // nos suscribimos a observable de dispositivos, la lista de dispositivos que encuentra  
-    let TIME_IN_MS = 5000;
-    //setTimeout( () => {
-      this.dispositivosRef = this._bleService.dispositivosSalida$.subscribe(response => {
-        console.log(response);
-        this.dispositivos = response;
-      })
-    //}, TIME_IN_MS);  
-   
     
     
 
