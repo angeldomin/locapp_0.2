@@ -65,7 +65,7 @@ export class UsuarioPage {
   }
 
   // Función que abre la ventana de busqueda de dispositivos
-  asignarDispositivo() {    
+  asignarDispositivo() { 
     this.usuario.id_dispositivo = ''; // si ya tenía uno asignado se lo quitamos
     // navegamos a ventana de busqueda de dispositivos pasandole el usuario y el callback para añadir el dispositivo
     this.navCtrl.push(NewDispositivoPage, { usuario: this.usuario, callback: this.myCallbackFunction});
@@ -77,7 +77,7 @@ export class UsuarioPage {
   }
 
   // guardamos los datos en bbdd y navegamos 
-  guardar() {    
+  guardar() {
     console.log('Guardamos el usuario -> ', this.usuario);
     if (this.modo === 'edit') {
       this.editUser(this.usuario);

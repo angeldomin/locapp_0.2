@@ -50,7 +50,7 @@ export class NewDispositivoPage {
     // this.dispositivos$ = this._bleService.getClientes$();
     // this.dispositivos$.subscribe(dispositivos => this.dispositivos = dispositivos);
     this.dispositivosRef = this._bleService.dispositivosSalida$.subscribe(response => {
-      debugger;
+      // debugger;
       this.dispositivos = response;
     });
     
@@ -75,23 +75,12 @@ export class NewDispositivoPage {
     console.log(this.dispositivos);
   }
 
-  buscar() {
-    // simulado
-    // this.dispositivos = [ new Dispositivo ('ID01', '000000000', 'Dispositivo 0', 'Dispositivo simulado 0')];
-    // this.dispositivos.push( new Dispositivo('ID02', '000000001', 'Dispositivo 1', 'Dispositivo simulado 1') );
-    // this.dispositivos.push( new Dispositivo('ID03', '000000002', 'Dispositivo 2', 'Dispositivo simulado 2') );
-    // this.dispositivos.push( new Dispositivo('ID04', '000000003', 'Dispositivo 3', 'Dispositivo simulado 3') );
-    // verdadero  
-    // console.log('estamos en buscar', this._bleService.dispositivosSalida$);
-    this._bleService.scan();
-    
-    
-
-    
+  buscar() {    
+    this._bleService.scan();        
   }
 
-  registrar(dispositivo: Dispositivo) {
-    this.usuario.id_dispositivo = dispositivo._id;
+  registrar(dispositivo: Dispositivo) { debugger;
+    this.usuario.id_dispositivo = dispositivo.uuid;
     // hacemos uso de callback para pasar el usuario modificado con el id del dispositivo   
     this.callback(this.usuario).then(()=>{      
       this.navCtrl.pop();

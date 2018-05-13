@@ -22,7 +22,6 @@
   <br><br>
   <button ion-button (click)="buscar()">Buscar dispositivos Bluetooth</button>
   <button ion-button (click)="hola()">Console</button>
-  {{dispositivos[0]}}
   <ion-list>
     <div ion-item *ngFor="let dispositivo of dispositivos" (click)="registrar(dispositivo)">      
       {{dispositivo.nombre_dispositivo}} {{dispositivo.descripcion}}  

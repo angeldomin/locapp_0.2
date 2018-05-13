@@ -24,11 +24,11 @@ export class BleServiceProvider {
   scan() {
     console.log('escaneando'); this.dispositivosSalida = [];
     this._ble.scan([], 20).subscribe(response => {
-        debugger;      
+        console.log(response);      
         this.dispositivosSalida.push(new Dispositivo('', response.id, response.name, ''));
         this.dispositivosSalida$.next(this.dispositivosSalida);  
         console.log(this.dispositivosSalida);      
-    }); // console.log(this.dispositivosSalida , 'hola');
+    });
   }
 
   getClientes$(): Observable<Dispositivo[]> {
