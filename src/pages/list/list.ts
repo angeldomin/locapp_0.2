@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { FirebaseServiceProvider } from '../../providers/firebase-service/firebase-service';
 import { UsuarioPage } from '../usuario/usuario';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { BleServiceProvider } from '../../providers/ble-service/ble-service';
 
 @Component({
   selector: 'page-list',
@@ -20,7 +21,8 @@ export class ListPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private _firebaseService: FirebaseServiceProvider,
-              private alertCtrl: AlertController
+              private alertCtrl: AlertController,
+              private _bleService: BleServiceProvider
             ) {
 
     // nos suscribimos a observable de usuarios, la lista de usuarios guardados en base de datos
@@ -67,6 +69,10 @@ export class ListPage {
 
   editar(usuario: Usuario) {
     this.navCtrl.push(UsuarioPage, {usuario: usuario, mode: 'edit'})
+  }
+
+  conectar(usuario: Usuario){
+    this._bleService.conectar(usuario.id_dispositivo);
   }
 
 }

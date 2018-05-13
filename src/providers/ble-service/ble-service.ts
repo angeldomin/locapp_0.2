@@ -34,6 +34,39 @@ export class BleServiceProvider {
   getClientes$(): Observable<Dispositivo[]> {
     return this.dispositivosSalida$.asObservable();
   }
+
+  conectar(uuid) {
+
+    this._ble.isConnected(uuid).then( 
+        () => { 
+            console.log('connected');
+            this._ble.disconnect(uuid); console.log('xx Nos desconectamos del dispositivo ', uuid);
+        }, 
+        () => { 
+            console.log('not connected');
+            this._ble.connect(uuid).subscribe(
+                peripheralData => { 
+                    console.log(peripheralData); 
+                }, peripheralData => { 
+                    console.log('disconnected'); 
+                });
+            // this._ble.connect(uuid); console.log('-- Conectamos al dispositivo ', uuid);
+            // // emepzar a leer la señal cada x milisegundos
+            // console.log('RSSI ->', this._ble.readRSSI(uuid));
+            // this._ble.readRSSI(uuid)
+        } 
+    );
+
+            /*
+    if (this._ble.isConnected(uuid)) {
+        this._ble.disconnect(uuid); console.log('xx Nos desconectamos del dispositivo ', uuid);
+    } else {
+        this._ble.connect(uuid); console.log('-- Conectamos al dispositivo ', uuid);
+        // emepzar a leer la señal cada x milisegundos
+        console.log('RSSI ->', this._ble.readRSSI(uuid));
+    }*/
+      
+  }
  
 }
 

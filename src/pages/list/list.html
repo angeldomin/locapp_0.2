@@ -11,7 +11,7 @@
   <ion-list>
     <div class="divUsuario" ion-item *ngFor="let usuario of usuarios" (click)="seleccionar(usuario)">      
       <label class="labelUsuario">{{usuario.nombre}} {{usuario.apellido1}}</label>     
-      <button ion-button class="btnLink">
+      <button ion-button class="btnLink" (click)="conectar(usuario)">
           <ion-icon name="link"></ion-icon>
       </button>
       <button ion-button color="light" class="btnOptions" (click)="editar(usuario)">
