@@ -17,13 +17,20 @@ export class ListPage {
   selectedUser: any;
   usuarios: Usuario[];
   usuariosRef: Subscription;
+  grupo: String;
   
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              private _firebaseService: FirebaseServiceProvider,
-              private alertCtrl: AlertController,
-              private _bleService: BleServiceProvider
-            ) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private _firebaseService: FirebaseServiceProvider,
+    private alertCtrl: AlertController,
+    private _bleService: BleServiceProvider
+  ) {
+    if (navParams.get('grupo')) {
+      this.grupo = navParams.get('grupo');
+    } else {
+      this.grupo = '';
+    }
 
     // nos suscribimos a observable de usuarios, la lista de usuarios guardados en base de datos
     this.usuariosRef = this._firebaseService.usuariosSalida$.subscribe(response => {

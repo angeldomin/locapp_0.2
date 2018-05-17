@@ -11,7 +11,7 @@
   </div>
   <ion-list>
     <div class="divGrupo" ion-item *ngFor="let grupo of grupos">      
-      <label class="labelGrupo">{{grupo.nombre}} {{grupo.apellido1}}</label>
+      <label class="labelGrupo">{{grupo.nombre}} {{grupo.descripcion}}</label>
       <button ion-button color="light" class="btnOptions" (click)="editar(grupo)">
         <ion-icon name="options"></ion-icon>
       </button>
