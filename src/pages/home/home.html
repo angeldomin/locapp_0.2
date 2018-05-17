@@ -8,11 +8,19 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Locapp</h3>
-
-  <p>
+  <ion-item text-center>
+    <ion-img width="192" height="96" src="assets/logo192_96.png" ></ion-img>
+  </ion-item>
+  <h3 text-center>Locapp</h3>
+  <p text-center>
     Aplicación que avisa si un niño se aleja y te ayuda a localizarlo.
   </p>
-
-  <button ion-button secondary menuToggle>Menú</button>
+  <div class="divOptions">
+    <button ion-button block color="light" (click)='cargaGrupos()'>Cargar grupo</button>
+    <button ion-button block color="light" (click)='nuevoGrupo()'>Nuevo grupo</button>
+    <button ion-button block color="light" (click)='gestionaUsuarios()'>Gestión de usuarios</button>  
+  </div>
+  <div class="divFoot">
+    <button ion-button color="light" (click)='salir()'>Salir</button>
+  </div>
 </ion-content>

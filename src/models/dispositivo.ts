@@ -3,6 +3,7 @@ export class Dispositivo {
         public _id: string,     
         public uuid: string,
         public nombre_dispositivo: string,
-        public descripcion: string
+        public descripcion: string,
+        public enUso: boolean
     ) {}
 }

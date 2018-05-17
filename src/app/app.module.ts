@@ -9,14 +9,16 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { Firebase } from '@ionic-native/firebase';
 import { BLE } from '@ionic-native/ble';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BuscadorPage } from '../pages/buscador/buscador';
-import { NewDispositivoPage } from '../pages/new-dispositivo/new-dispositivo';
+import { DispositivosPage } from '../pages/dispositivos/dispositivos';
 import { UsuarioPage } from '../pages/usuario/usuario';
 import { SuMenuPage } from '../pages/su-menu/su-menu';
 import { SuAltaEditPage } from '../pages/su-alta-edit/su-alta-edit';
+import { SuListadoProfesionalesPage } from '../pages/su-listado-profesionales/su-listado-profesionales';
 
 // firebase imports
 import { FirebaseServiceProvider } from '../providers/firebase-service/firebase-service';
@@ -26,7 +28,7 @@ import * as firebase from 'firebase/app';
 import { BleServiceProvider } from '../providers/ble-service/ble-service';
 import { LoginPage } from '../pages/login/login';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { SuListadoProfesionalesPage } from '../pages/su-listado-profesionales/su-listado-profesionales';
+
 
 // configuracion de la base de datos proporcionada por mi firebase
 export const firebaseConfig = {
@@ -44,7 +46,7 @@ firebase.initializeApp(firebaseConfig);
     HomePage,
     ListPage,
     BuscadorPage,
-    NewDispositivoPage,
+    DispositivosPage,
     UsuarioPage,
     LoginPage,
     SuMenuPage,
@@ -65,7 +67,7 @@ firebase.initializeApp(firebaseConfig);
     HomePage,
     ListPage,
     BuscadorPage,
-    NewDispositivoPage,
+    DispositivosPage,
     UsuarioPage,
     LoginPage,
     SuMenuPage,
@@ -80,7 +82,8 @@ firebase.initializeApp(firebaseConfig);
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseServiceProvider,
     BLE,
-    BleServiceProvider
+    BleServiceProvider,
+    NativeAudio
   ]
 })
 export class AppModule {}
