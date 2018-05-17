@@ -16,7 +16,7 @@ export class SuListadoProfesionalesPage {
 
   searchTerm: string = '';
   searchControl: FormControl;
-  profesionales: Profesional[];  
+  profesionales: Profesional[];
   profesionalesRef: Subscription;
   searching: any = false;
 
