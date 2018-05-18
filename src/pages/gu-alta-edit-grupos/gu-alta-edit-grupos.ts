@@ -58,7 +58,7 @@ export class GuAltaEditGruposPage {
 
   guardar() {
     if (this.modo === 'new') {      
-      // this._firebaseService.newGrupo(this.grupo);
+      this._firebaseService.newGrupo(this.grupo);
       console.log('Nuevo grupo dado de alta correctamente.');
       let alert = this.alertCtrl.create({
         title: 'Grupo creado.',
@@ -68,7 +68,7 @@ export class GuAltaEditGruposPage {
       alert.present();
       this.navCtrl.pop();
     } else if (this.modo === 'edit') {
-      // this._firebaseService.editGrupo(this.grupo);
+      this._firebaseService.editGrupo(this.grupo);
       console.log('Edición de grupo correcta.');
       let alert = this.alertCtrl.create({
         title: 'Grupo modificado.',

@@ -217,7 +217,7 @@ export class FirebaseServiceProvider {
   deleteGrupo(grupo: Grupo) {
     console.log('borramos grupo');
     const gruposRef: firebase.database.Reference = firebase.database().ref('/grupos/');
-    var grupoRef = gruposRef. child(grupo._id);
+    var grupoRef = gruposRef.child(grupo._id);
     grupoRef.set(null);    
   }
   
