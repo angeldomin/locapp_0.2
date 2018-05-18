@@ -26,9 +26,11 @@ export class GuAltaEditGruposPage {
     public navParams: NavParams,
     private alertCtrl: AlertController
   ) {
-
     if (navParams.get('grupo')) {
       this.grupo = navParams.get('grupo');
+      if (!this.grupo.usuarios) {
+        this.grupo.usuarios = [];
+      }
     } else {
       this.grupo = new Grupo('', '', []);
     }
@@ -53,7 +55,14 @@ export class GuAltaEditGruposPage {
   }
 
   agregarUsuario() {
-    this.navCtrl.push(ListPage, {grupo: this.grupo._id});
+    if (this.grupo._id === '') { console.log('creamos nuevo grupo porque id es vacio');
+      this.grupo._id = this._firebaseService.newGrupo(this.grupo); console.log(this.grupo._id);
+    }
+    // his.navCtrl.push(ListPage, {grupo: this.grupo});
+    // setTimeout(this.navCtrl.push(ListPage, {grupo: this.grupo}), 5000);
+    setTimeout(() => {
+      this.navCtrl.push(ListPage, {grupo: this.grupo});
+     }, 5000);
   }
 
   guardar() {

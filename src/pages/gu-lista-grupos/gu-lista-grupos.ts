@@ -53,7 +53,7 @@ export class GuListaGruposPage {
   }
 
   editar(grupo: Grupo) {
-    this.navCtrl.push(GuAltaEditGruposPage, {grupo: Grupo, mode: 'edit'});    
+    this.navCtrl.push(GuAltaEditGruposPage, {grupo: grupo, mode: 'edit'});    
   }
 
   borrar(grupo: Grupo) {

@@ -192,7 +192,8 @@ export class FirebaseServiceProvider {
     console.log(profesionalRef);
   }
 
-  newGrupo(grupo: Grupo) {        
+  newGrupo(grupo: Grupo) {
+    console.log('creamos grupo', grupo);   
     const gruposRef: firebase.database.Reference = firebase.database().ref('/grupos/');        
     const _id = grupo._id;
     const nombre = grupo.nombre;
@@ -204,11 +205,12 @@ export class FirebaseServiceProvider {
       usuarios
     });
     
-    newPostRef.child("_id").set(newPostRef.key);     
+    newPostRef.child("_id").set(newPostRef.key);
+    return newPostRef.key;
   }
 
   editGrupo(grupo: Grupo) {
-    console.log('editamos grupo');
+    console.log('editamos grupo', grupo);
     const gruposRef: firebase.database.Reference = firebase.database().ref('/grupos/');
     var grupoRef = gruposRef.child(grupo._id);
     grupoRef.set(grupo);
