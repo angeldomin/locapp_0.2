@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { BuscadorPage } from '../pages/buscador/buscador';
-import { NewDispositivoPage } from '../pages/new-dispositivo/new-dispositivo';
+import { DispositivosPage } from '../pages/dispositivos/dispositivos';
 import { UsuarioPage } from '../pages/usuario/usuario';
 import { LoginPage } from '../pages/login/login';
 import { SuMenuPage } from '../pages/su-menu/su-menu';
@@ -30,7 +30,7 @@ export class MyApp {
       { title: 'Inicio', component: HomePage },
       { title: 'Nuevo Usuario', component: UsuarioPage },
       { title: 'Usuarios', component: ListPage },
-      { title: 'Dispositivos', component: NewDispositivoPage },
+      { title: 'Dispositivos', component: DispositivosPage },
       { title: 'Buscador', component: BuscadorPage },
       { title: 'Login', component: LoginPage },
       { title: 'SU_MENU', component: SuMenuPage },

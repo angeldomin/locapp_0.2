@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { NewDispositivoPage } from '../new-dispositivo/new-dispositivo';
+import { DispositivosPage } from '../dispositivos/dispositivos';
 import { Usuario } from '../../models/usuario';
 // import { HomePage } from '../../pages/home/home';
 import { FirebaseServiceProvider } from '../../providers/firebase-service/firebase-service';
@@ -68,7 +68,7 @@ export class UsuarioPage {
   asignarDispositivo() { 
     this.usuario.id_dispositivo = ''; // si ya tenía uno asignado se lo quitamos
     // navegamos a ventana de busqueda de dispositivos pasandole el usuario y el callback para añadir el dispositivo
-    this.navCtrl.push(NewDispositivoPage, { usuario: this.usuario, callback: this.myCallbackFunction});
+    this.navCtrl.push(DispositivosPage, { usuario: this.usuario, callback: this.myCallbackFunction});
   }
 
   // Función para quitar dispositivo asignado al usuario

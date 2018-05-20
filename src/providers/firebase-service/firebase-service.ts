@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { Profesional } from '../../models/profesional';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController, Loading, LoadingController } from 'ionic-angular';
+import { Grupo } from '../../models/grupo';
 
 /*  
   Este service se encargará de las operaciones con la base de datos firebase.
@@ -22,6 +23,9 @@ export class FirebaseServiceProvider {
 
   profesionalesRef: AngularFireList<any>;
   profesionalesSalida$: Observable<any[]>;
+
+  gruposRef: AngularFireList<any>;
+  gruposSalida$: Observable<any[]>;
 
   public loading: Loading;
 
@@ -75,6 +79,11 @@ export class FirebaseServiceProvider {
       return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
 
+    this.gruposRef = this.dataBase.list('/grupos/');
+    this.gruposSalida$ = this.gruposRef.snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
+
   }
  
   newUsuario(usuario:Usuario) {
@@ -119,12 +128,7 @@ export class FirebaseServiceProvider {
     userRef.set(null);
     console.log(userRef);
   }
-
-  getUsuario() {
-    // const usuariosRef: firebase.database.Reference = firebase.database().ref('/usuarios/');
-    // console.log(usuariosRef.toJSON);   
-  }
-
+  
   /* Para usar la autenticación que proporciona firebase tenemos que adaptarnos. Esa autenticación se basa en 
   email+password, pero nosotros queremso hacerlo por usuario y pass. Para que firebase acepte el usuarrio
   le añado el @locapp.com y así lo toma como email. Eso por un lado, así damos de alta el usuario para el logado
@@ -186,6 +190,37 @@ export class FirebaseServiceProvider {
     var profesionalRef = profesionalesRef. child(profesional._id);
     profesionalRef.set(null);
     console.log(profesionalRef);
+  }
+
+  newGrupo(grupo: Grupo) {
+    console.log('creamos grupo', grupo);   
+    const gruposRef: firebase.database.Reference = firebase.database().ref('/grupos/');        
+    const _id = grupo._id;
+    const nombre = grupo.nombre;
+    const usuarios = grupo.usuarios;    
+     
+    var newPostRef = gruposRef.push({
+      _id,
+      nombre,
+      usuarios
+    });
+    
+    newPostRef.child("_id").set(newPostRef.key);
+    return newPostRef.key;
+  }
+
+  editGrupo(grupo: Grupo) {
+    console.log('editamos grupo', grupo);
+    const gruposRef: firebase.database.Reference = firebase.database().ref('/grupos/');
+    var grupoRef = gruposRef.child(grupo._id);
+    grupoRef.set(grupo);
+  }
+
+  deleteGrupo(grupo: Grupo) {
+    console.log('borramos grupo');
+    const gruposRef: firebase.database.Reference = firebase.database().ref('/grupos/');
+    var grupoRef = gruposRef.child(grupo._id);
+    grupoRef.set(null);    
   }
   
 } 

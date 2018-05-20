@@ -1,0 +1,46 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Alta/Edición de grupos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="modo == 'edit'">
+    <ion-title>Edición de grupo</ion-title>
+  </div>
+  <div *ngIf="modo == 'new'">
+    <ion-title>Alta de grupo nuevo</ion-title>
+  </div>
+  <form [formGroup]="grupoForm">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Nombre</ion-label>        
+        <ion-input formControlName="nombre" type="text" [(ngModel)]="grupo.nombre"></ion-input>
+      </ion-item>
+      <div class="divTitulo2">        
+        <button class="btn" ion-button icon-only (click)="agregarUsuario()">
+          <ion-icon name="person-add"></ion-icon>
+        </button>
+      </div>     
+      <ion-list>
+        <div class="divUsuario" ion-item *ngFor="let usuario of grupo.usuarios" (click)="seleccionar(usuario)">      
+          <label class="labelUsuario">{{usuario.nombre}} {{usuario.apellido1}}</label>     
+          <button ion-button class="btnLink" (click)="conectar(usuario)">
+              <ion-icon name="link"></ion-icon>
+          </button>
+          <button ion-button color="light" class="btnOptions" (click)="editar(usuario)">
+            <ion-icon name="options"></ion-icon>
+          </button>
+          <button ion-button color="danger" class="btnRemove" (click)="borrar(usuario)">
+            <ion-icon name="remove"></ion-icon>
+          </button>
+        </div>
+      </ion-list>
+    </ion-list> 
+  </form>
+  <div class="foot" padding>
+    <button ion-button color="light" block (click)="guardar()" [disabled]="!grupoForm.valid">Confirmar</button>
+    <button ion-button color="primary" block class="btnVolver" (click)='volver()'>Cancelar</button>
+  </div>
+</ion-content>

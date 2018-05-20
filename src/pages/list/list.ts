@@ -7,6 +7,7 @@ import { FirebaseServiceProvider } from '../../providers/firebase-service/fireba
 import { UsuarioPage } from '../usuario/usuario';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { BleServiceProvider } from '../../providers/ble-service/ble-service';
+import { Grupo } from '../../models/grupo';
 
 @Component({
   selector: 'page-list',
@@ -17,23 +18,43 @@ export class ListPage {
   selectedUser: any;
   usuarios: Usuario[];
   usuariosRef: Subscription;
+  grupo: Grupo;  
   
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              private _firebaseService: FirebaseServiceProvider,
-              private alertCtrl: AlertController,
-              private _bleService: BleServiceProvider
-            ) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private _firebaseService: FirebaseServiceProvider,
+    private alertCtrl: AlertController,
+    private _bleService: BleServiceProvider
+  ) {
+    if (navParams.get('grupo')) {
+      this.grupo = navParams.get('grupo');
+      if (!this.grupo.usuarios) {
+        this.grupo.usuarios = [];
+      }
+    } else {
+      this.grupo = new Grupo('', '', []);
+    }
 
     // nos suscribimos a observable de usuarios, la lista de usuarios guardados en base de datos
     this.usuariosRef = this._firebaseService.usuariosSalida$.subscribe(response => {
       this.usuarios = response;
-    })
+    });
 
   }
 
-  seleccionar(usuario) {
-    this.selectedUser = usuario;
+  seleccionar(usuario: Usuario) {
+    this.selectedUser = usuario; console.log(this.grupo);
+
+    if (this.grupo.usuarios.indexOf(usuario._id) >= 0){
+      // quitamos del grupo al usuario
+      this.grupo.usuarios.splice(this.grupo.usuarios.indexOf(usuario._id), 1);
+    } else {
+      // añadimos el usuario al grupo
+      this.grupo.usuarios.push(usuario._id);
+    }
+    // actualizamos en base de datos
+    this._firebaseService.editGrupo(this.grupo);
   }
   
   buscar(usuario) {
