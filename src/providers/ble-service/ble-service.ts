@@ -46,7 +46,15 @@ export class BleServiceProvider {
             console.log('not connected');
             this._ble.connect(uuid).subscribe(
                 peripheralData => { 
-                    console.log(peripheralData); 
+                    console.log(peripheralData);
+                    console.log('RSSI ->', this._ble.readRSSI(uuid));
+                    this._ble.readRSSI(uuid).then(
+                        res => {
+                            console.log(res); 
+                        }, error => {
+                            console.log(error);                        
+                        });
+                    
                 }, peripheralData => { 
                     console.log('disconnected'); 
                 });

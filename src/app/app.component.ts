@@ -12,6 +12,8 @@ import { LoginPage } from '../pages/login/login';
 import { SuMenuPage } from '../pages/su-menu/su-menu';
 import { SuAltaEditPage } from '../pages/su-alta-edit/su-alta-edit';
 import { SuListadoProfesionalesPage } from '../pages/su-listado-profesionales/su-listado-profesionales';
+import { PruebasPage } from '../pages/pruebas/pruebas';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,7 +25,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private nativeAudio: NativeAudio) {
     this.initializeApp();
     
     this.pages = [
@@ -35,15 +37,20 @@ export class MyApp {
       { title: 'Login', component: LoginPage },
       { title: 'SU_MENU', component: SuMenuPage },
       { title: 'SU_ALTA_EDIT', component: SuAltaEditPage },
-      { title: 'SU_LISTA_PROF', component: SuListadoProfesionalesPage }
+      { title: 'SU_LISTA_PROF', component: SuListadoProfesionalesPage },
+      { title: 'PRUEBAS', component: PruebasPage }
     ];
 
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    this.platform.ready().then(() => {      
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      
+      this.nativeAudio.preloadComplex('warning', 'assets/audio/Bleep.mp3', 1, 1, 0);
+      this.nativeAudio.preloadComplex('danger', 'assets/audio/RadioInterruption.mp3', 1, 1, 0);
+      
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

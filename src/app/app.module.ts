@@ -21,6 +21,8 @@ import { SuAltaEditPage } from '../pages/su-alta-edit/su-alta-edit';
 import { SuListadoProfesionalesPage } from '../pages/su-listado-profesionales/su-listado-profesionales';
 import { GuAltaEditGruposPage } from '../pages/gu-alta-edit-grupos/gu-alta-edit-grupos';
 import { GuListaGruposPage } from '../pages/gu-lista-grupos/gu-lista-grupos';
+import { AudioServiceProvider } from '../providers/audio-service/audio-service';
+import { PruebasPage } from '../pages/pruebas/pruebas';
 
 // firebase imports
 import { FirebaseServiceProvider } from '../providers/firebase-service/firebase-service';
@@ -30,8 +32,6 @@ import * as firebase from 'firebase/app';
 import { BleServiceProvider } from '../providers/ble-service/ble-service';
 import { LoginPage } from '../pages/login/login';
 import { AngularFireAuth } from 'angularfire2/auth';
-
-
 
 // configuracion de la base de datos proporcionada por mi firebase
 export const firebaseConfig = {
@@ -56,7 +56,8 @@ firebase.initializeApp(firebaseConfig);
     SuAltaEditPage,
     SuListadoProfesionalesPage,
     GuAltaEditGruposPage,
-    GuListaGruposPage
+    GuListaGruposPage,
+    PruebasPage
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
@@ -79,7 +80,8 @@ firebase.initializeApp(firebaseConfig);
     SuAltaEditPage,
     SuListadoProfesionalesPage,
     GuAltaEditGruposPage,
-    GuListaGruposPage
+    GuListaGruposPage,
+    PruebasPage
   ],
   providers: [
     StatusBar,
@@ -90,7 +92,8 @@ firebase.initializeApp(firebaseConfig);
     FirebaseServiceProvider,
     BLE,
     BleServiceProvider,
-    NativeAudio
+    NativeAudio,
+    AudioServiceProvider
   ]
 })
 export class AppModule {}
