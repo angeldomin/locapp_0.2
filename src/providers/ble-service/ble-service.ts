@@ -47,10 +47,10 @@ export class BleServiceProvider {
             this._ble.connect(uuid).subscribe(
                 peripheralData => { 
                     console.log(peripheralData);
-                    console.log('RSSI ->', this._ble.readRSSI(uuid));
+                    // console.log('RSSI ->', this._ble.readRSSI(uuid));
                     this._ble.readRSSI(uuid).then(
-                        res => {
-                            console.log(res); 
+                        rssi => {
+                            console.log('RSSI -> ', rssi);
                         }, error => {
                             console.log(error);                        
                         });
