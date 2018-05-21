@@ -5,6 +5,7 @@ import { Dispositivo } from '../../models/dispositivo';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
 @Injectable()
 export class BleServiceProvider {
@@ -16,14 +17,16 @@ export class BleServiceProvider {
 
   constructor(
     public http: HttpClient,
-    private _ble: BLE
+    private _ble: BLE,
+    private toastCtrl: ToastController
   ) {
     this.dispositivosSalida = [];
   }  
 
   scan() {
-    console.log('escaneando'); this.dispositivosSalida = [];
-    this._ble.scan([], 20).subscribe(response => {
+    console.log('escaneando'); 
+    this.dispositivosSalida = [];
+    this._ble.scan([], 5).subscribe(response => {
         console.log(response);      
         this.dispositivosSalida.push(new Dispositivo('', response.id, response.name, '', false));
         this.dispositivosSalida$.next(this.dispositivosSalida);  
@@ -41,13 +44,32 @@ export class BleServiceProvider {
         () => { 
             console.log('connected');
             this._ble.disconnect(uuid); console.log('xx Nos desconectamos del dispositivo ', uuid);
+            let toast = this.toastCtrl.create({
+                message: 'The peripheral disconnected',
+                duration: 3000,
+                position: 'middle'
+              });
+            toast.present();
         }, 
         () => { 
             console.log('not connected');
             this._ble.connect(uuid).subscribe(
                 peripheralData => { 
                     console.log(peripheralData);
+                    // a cada segundo lanzamos la llamada (PROBAR)
+                    /*
+                    setInterval(function(){ this._ble.readRSSI(uuid).then(
+                        rssi => {
+                            console.log('RSSI -> ', rssi);
+                        }, error => {
+                            console.log(error);                        
+                        }); 
+                    
+                    }, 1000);*/
+
                     // console.log('RSSI ->', this._ble.readRSSI(uuid));
+
+                    // lanzamos una vez la llamada (PROBAR si continúa o solo lo hace una vez)
                     this._ble.readRSSI(uuid).then(
                         rssi => {
                             console.log('RSSI -> ', rssi);
