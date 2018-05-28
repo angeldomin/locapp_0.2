@@ -48,6 +48,17 @@ export class PruebasPage {
 
   conectar() {
     let itagUUID = 'FF:FF:B0:00:4B:2D';
+    this._ble.conectar(itagUUID); 
+  }
+
+  conectarPokemon() {
+    let itagUUID = '7C:BB:8A:28:97:E6';
     this._ble.conectar(itagUUID);
   }
+
+  conectarMyBand() { 
+    let itagUUID = 'D7:E6:78:60:AB:0F';
+    this._ble.conectar(itagUUID);
+  }
+
 }

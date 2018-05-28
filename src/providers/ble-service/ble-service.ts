@@ -9,31 +9,42 @@ import { ToastController } from 'ionic-angular/components/toast/toast-controller
 import { ParUsuarioRSSI } from '../../models/par-usuario-rssi';
 import { Grupo } from '../../models/grupo';
 
-@Injectable()
+@Injectable() 
 export class BleServiceProvider {
 
     // public dispositivosSalida$: Observable<any[]>; // observable para recuperar los dispositivos que encontramos al escanear
+<<<<<<< HEAD
     public dispositivosSalida: Dispositivo[];
     public dispositivosSalida$ = new Subject<Dispositivo[]>();
 
     public paresUsuarioRSSI: ParUsuarioRSSI[];
     public paresUsuarioRSSISalida$ = new Subject<ParUsuarioRSSI[]>();
+=======
+    public dispositivosSalida: Dispositivo[]; 
+    public dispositivosSalida$ = new Subject<Dispositivo[]>();
+
+    public dispositivosScan: Dispositivo[];
+>>>>>>> 0a076f2da5be43d3fed2c48e7009d8eeb63691e3
 
   constructor(
     public http: HttpClient,
     private _ble: BLE,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController 
   ) {
     this.dispositivosSalida = [];
+<<<<<<< HEAD
     this.paresUsuarioRSSI = [];
   }  
+=======
+  }   
+>>>>>>> 0a076f2da5be43d3fed2c48e7009d8eeb63691e3
 
   scan() {
     console.log('escaneando'); 
     this.dispositivosSalida = [];
     this._ble.scan([], 5).subscribe(response => {
         console.log(response);      
-        this.dispositivosSalida.push(new Dispositivo('', response.id, response.name, '', false));
+        this.dispositivosSalida.push(new Dispositivo('', response.id, response.name, '', false, 0));
         this.dispositivosSalida$.next(this.dispositivosSalida);  
         console.log(this.dispositivosSalida);      
     });
@@ -56,6 +67,7 @@ export class BleServiceProvider {
               });
             toast.present();
         }, 
+<<<<<<< HEAD
         () => {
             console.log('not connected');
             this._ble.connect(uuid).subscribe(
@@ -70,6 +82,27 @@ export class BleServiceProvider {
                         }); 
                     
                     }, 1000);
+=======
+        () => {   
+            console.log('not connected');
+            this._ble.connect(uuid).subscribe( 
+                peripheralData => {
+                    console.log(peripheralData);                   
+                    let leyendo = false;
+                    setInterval(()=>{
+                        if (!leyendo) {
+                            leyendo = true;
+                            this._ble.readRSSI(uuid).then(
+                                rssi => {
+                                    console.log(uuid+' RSSI -> ', rssi);
+                                    leyendo = false;
+                                }, error => {
+                                    console.log(error); 
+                                    leyendo = false;        
+                                });
+                        }                    
+                    }, 1000);                    
+>>>>>>> 0a076f2da5be43d3fed2c48e7009d8eeb63691e3
                 }, peripheralData => { 
                     console.log('disconnected'); 
                 });
@@ -77,6 +110,7 @@ export class BleServiceProvider {
     );      
   }
 
+<<<<<<< HEAD
   multiconect(grupo: Grupo) {
 
     grupo.usuarios.forEach(usuario => {
@@ -100,9 +134,14 @@ export class BleServiceProvider {
             });
     });
     
+=======
+  multiconect(listaDispositivos) {
+
+>>>>>>> 0a076f2da5be43d3fed2c48e7009d8eeb63691e3
   }
  
 }
+
 
 
 /* información de: https://ionicframework.com/docs/native/ble/
