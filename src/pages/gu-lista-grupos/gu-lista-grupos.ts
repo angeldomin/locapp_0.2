@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { FirebaseServiceProvider } from '../../providers/firebase-service/firebase-service';
 import { GuAltaEditGruposPage } from '../gu-alta-edit-grupos/gu-alta-edit-grupos';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { GuMultiscanPage } from '../gu-multiscan/gu-multiscan';
 
 @IonicPage()
 @Component({
@@ -50,6 +51,10 @@ export class GuListaGruposPage {
   buscarGrupos() {
     // firebaseService.getListaGrupos(seachTerm)
     // TODO
+  }
+
+  seleccionar(grupo: Grupo) {    
+    this.navCtrl.push(GuMultiscanPage, {grupo: grupo});
   }
 
   editar(grupo: Grupo) {
