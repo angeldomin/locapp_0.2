@@ -64,8 +64,8 @@ export class DispositivosPage {
 
     // buscar los dispositivos guardados anteriormente
     // simulamos esta busqueda en nuestra base de datos (no se si necesitaremos indicador de asignado)
-    this.dispositivosConocidos = [ new Dispositivo ('ID11', '000000011', 'Dispositivo 11', 'Dispositivo conocido 11', false)];
-    this.dispositivosConocidos.push( new Dispositivo('ID12', '000000012', 'Dispositivo 12', 'Dispositivo conocido 12', false) );
+    this.dispositivosConocidos = [ new Dispositivo ('ID11', '000000011', 'Dispositivo 11', 'Dispositivo conocido 11', false, 0)];
+    this.dispositivosConocidos.push( new Dispositivo('ID12', '000000012', 'Dispositivo 12', 'Dispositivo conocido 12', false, 0) );
         
   }
 

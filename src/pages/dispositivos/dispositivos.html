@@ -21,7 +21,7 @@
   <button ion-button (click)="hola()">Console</button>
   <ion-list>
     <div ion-item *ngFor="let dispositivo of dispositivos" (click)="registrar(dispositivo)">      
-      {{dispositivo.nombre_dispositivo}} {{dispositivo.descripcion}}  
+      {{dispositivo.nombre_dispositivo || 'Unnamed'}} {{dispositivo.descripcion}}  
     </div>
   </ion-list>
 </ion-content>
