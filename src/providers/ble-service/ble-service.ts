@@ -93,8 +93,9 @@ export class BleServiceProvider {
             peripheralData => {                 
                 setInterval(()=>{ this._ble.readRSSI(par.uuid).then(
                     rssi => {
-                        console.log('RSSI -> ', rssi);
+                        console.log(par.usuario, ' --- RSSI -> ', rssi);
                         par.rssi = rssi;
+                        this.paresUsuarioRSSISalida$.next(this.paresUsuarioRSSI);
                     }, error => {
                         console.log(error);                        
                     });

@@ -5,6 +5,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { BleServiceProvider } from '../../providers/ble-service/ble-service';
 import { Grupo } from '../../models/grupo';
 import { ParUsuarioRSSI } from '../../models/par-usuario-rssi';
+import { Subscription } from 'rxjs/Subscription';
 
 @IonicPage()
 @Component({
@@ -16,6 +17,7 @@ export class GuMultiscanPage {
   grupo: Grupo;
   listaUsuarioRSSI: ParUsuarioRSSI[];
   conectado = false;
+  paresUsuarioRSSIRef: Subscription;
 
   constructor(
     public navCtrl: NavController,
@@ -35,6 +37,10 @@ export class GuMultiscanPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GuMultiscanPage');
+    this.paresUsuarioRSSIRef = this._bleService.paresUsuarioRSSISalida$.subscribe(response => {
+      // debugger;
+      this.listaUsuarioRSSI = response;
+    });
   }
 
   inicializarListaUsuarioRSSI() {
