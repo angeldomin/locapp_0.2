@@ -6,14 +6,18 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
+import { ParUsuarioRSSI } from '../../models/par-usuario-rssi';
+import { Grupo } from '../../models/grupo';
 
 @Injectable()
 export class BleServiceProvider {
 
     // public dispositivosSalida$: Observable<any[]>; // observable para recuperar los dispositivos que encontramos al escanear
     public dispositivosSalida: Dispositivo[];
-
     public dispositivosSalida$ = new Subject<Dispositivo[]>();
+
+    public paresUsuarioRSSI: ParUsuarioRSSI[];
+    public paresUsuarioRSSISalida$ = new Subject<ParUsuarioRSSI[]>();
 
   constructor(
     public http: HttpClient,
@@ -21,6 +25,7 @@ export class BleServiceProvider {
     private toastCtrl: ToastController
   ) {
     this.dispositivosSalida = [];
+    this.paresUsuarioRSSI = [];
   }  
 
   scan() {
@@ -51,51 +56,50 @@ export class BleServiceProvider {
               });
             toast.present();
         }, 
-        () => { 
+        () => {
             console.log('not connected');
             this._ble.connect(uuid).subscribe(
                 peripheralData => { 
                     console.log(peripheralData);
-                    // a cada segundo lanzamos la llamada (PROBAR)
-                    /*
-                    setInterval(function(){ this._ble.readRSSI(uuid).then(
+                    setInterval(()=>{ this._ble.readRSSI(uuid).then(
                         rssi => {
                             console.log('RSSI -> ', rssi);
+                            
                         }, error => {
                             console.log(error);                        
                         }); 
                     
-                    }, 1000);*/
-
-                    // console.log('RSSI ->', this._ble.readRSSI(uuid));
-
-                    // lanzamos una vez la llamada (PROBAR si continúa o solo lo hace una vez)
-                    this._ble.readRSSI(uuid).then(
-                        rssi => {
-                            console.log('RSSI -> ', rssi);
-                        }, error => {
-                            console.log(error);                        
-                        });
-                    
+                    }, 1000);
                 }, peripheralData => { 
                     console.log('disconnected'); 
                 });
-            // this._ble.connect(uuid); console.log('-- Conectamos al dispositivo ', uuid);
-            // // emepzar a leer la señal cada x milisegundos
-            // console.log('RSSI ->', this._ble.readRSSI(uuid));
-            // this._ble.readRSSI(uuid)
         } 
-    );
+    );      
+  }
 
-            /*
-    if (this._ble.isConnected(uuid)) {
-        this._ble.disconnect(uuid); console.log('xx Nos desconectamos del dispositivo ', uuid);
-    } else {
-        this._ble.connect(uuid); console.log('-- Conectamos al dispositivo ', uuid);
-        // emepzar a leer la señal cada x milisegundos
-        console.log('RSSI ->', this._ble.readRSSI(uuid));
-    }*/
-      
+  multiconect(grupo: Grupo) {
+
+    grupo.usuarios.forEach(usuario => {
+        this.paresUsuarioRSSI.push(new ParUsuarioRSSI(usuario.nombre, usuario.id_dispositivo, 0, false, false));
+    });
+
+    this.paresUsuarioRSSI.forEach(par => {
+        this._ble.connect(par.uuid).subscribe(
+            peripheralData => {                 
+                setInterval(()=>{ this._ble.readRSSI(par.uuid).then(
+                    rssi => {
+                        console.log('RSSI -> ', rssi);
+                        par.rssi = rssi;
+                    }, error => {
+                        console.log(error);                        
+                    }); 
+                
+                }, 1000);
+            }, peripheralData => {
+                console.log('disconnected'); 
+            });
+    });
+    
   }
  
 }
