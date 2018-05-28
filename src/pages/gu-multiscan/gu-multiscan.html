@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>gu-multiscan</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-title>{{grupo.nombre}}</ion-title><!-- botoncito de editar??? para ir directamente -->
+
+    <!-- lista de usuarios de este grupo -->
+    <ion-list>
+      <div ion-item *ngFor="let parUsuarioRSSI of listaUsuarioRSSI">
+        <label>{{parUsuarioRSSI.nombre}}</label>
+        <label>{{parUsuarioRSSI.rssi}}</label>
+        <!-- botoncito de mute??? para parar el sonido de alerta-->
+      </div>
+    </ion-list>
+
+    <!-- conectar y desconectar -->
+    <div padding *ngIf="!conectado">
+      <button ion-button color="primary" block class="btnConectar" (click)='conectar()'>Conectar</button>
+    </div>
+    <div padding *ngIf="conectado">
+      <button ion-button color="primary" block class="btnDesconectar" (click)='desconectar()'>Desconectar</button>
+    </div>
+
+    <!-- volver -->
+    <div padding>
+      <button ion-button color="primary" block class="btnVolver" (click)='volver()'>Volver</button>
+    </div>
+
+</ion-content>
