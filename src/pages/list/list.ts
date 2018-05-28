@@ -46,12 +46,12 @@ export class ListPage {
   seleccionar(usuario: Usuario) {
     this.selectedUser = usuario; console.log(this.grupo);
 
-    if (this.grupo.usuarios.indexOf(usuario._id) >= 0){
+    if (this.grupo.usuarios.indexOf(usuario) >= 0){
       // quitamos del grupo al usuario
-      this.grupo.usuarios.splice(this.grupo.usuarios.indexOf(usuario._id), 1);
+      this.grupo.usuarios.splice(this.grupo.usuarios.indexOf(usuario), 1);
     } else {
       // añadimos el usuario al grupo
-      this.grupo.usuarios.push(usuario._id);
+      this.grupo.usuarios.push(usuario);
     }
     // actualizamos en base de datos
     this._firebaseService.editGrupo(this.grupo);
