@@ -32,29 +32,26 @@ export class GuMultiscanPage {
       this.grupo = new Grupo('', '', []);
     }
     this.listaUsuarioRSSI = [];
-    this.inicializarListaUsuarioRSSI();
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad GuMultiscanPage');
-    this.paresUsuarioRSSIRef = this._bleService.paresUsuarioRSSISalida$.subscribe(response => {
-      // debugger;
-      this.listaUsuarioRSSI = response;
-    });
-  }
-
-  inicializarListaUsuarioRSSI() {
     this.grupo.usuarios.forEach(usuario => {
       this.listaUsuarioRSSI.push(new ParUsuarioRSSI(usuario.nombre, usuario.id_dispositivo, 0, false, false));
     });
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad GuMultiscanPage');
+    this.paresUsuarioRSSIRef = this._bleService.paresUsuarioRSSISalida$.subscribe(response => {
+      this.listaUsuarioRSSI = response;
+    });
+  }  
+
   conectar() {
     this.conectado = true;
+    this._bleService.multiconect(this.grupo);
   }
 
   desconectar() {
     this.conectado = false;
+    this._bleService.multidisconect(this.grupo);
   }
 
   volver() {

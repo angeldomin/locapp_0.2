@@ -104,8 +104,13 @@ export class BleServiceProvider {
             }, peripheralData => {
                 console.log('disconnected'); 
             });
+    });    
+  }
+
+  multidisconect(grupo: Grupo) {
+    grupo.usuarios.forEach(usuario => {
+        this._ble.disconnect(usuario.id_dispositivo);
     });
-    
   }
  
 }
