@@ -32,6 +32,7 @@ import * as firebase from 'firebase/app';
 import { BleServiceProvider } from '../providers/ble-service/ble-service';
 import { LoginPage } from '../pages/login/login';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { GuMultiscanPage } from '../pages/gu-multiscan/gu-multiscan';
 
 // configuracion de la base de datos proporcionada por mi firebase
 export const firebaseConfig = {
@@ -57,6 +58,7 @@ firebase.initializeApp(firebaseConfig);
     SuListadoProfesionalesPage,
     GuAltaEditGruposPage,
     GuListaGruposPage,
+    GuMultiscanPage,
     PruebasPage
   ],
   imports: [
@@ -81,6 +83,7 @@ firebase.initializeApp(firebaseConfig);
     SuListadoProfesionalesPage,
     GuAltaEditGruposPage,
     GuListaGruposPage,
+    GuMultiscanPage,
     PruebasPage
   ],
   providers: [
