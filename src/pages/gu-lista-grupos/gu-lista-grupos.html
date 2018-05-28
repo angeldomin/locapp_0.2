@@ -10,7 +10,7 @@
     <ion-spinner></ion-spinner>
   </div>
   <ion-list>
-    <div class="divGrupo" ion-item *ngFor="let grupo of grupos">      
+    <div class="divGrupo" ion-item *ngFor="let grupo of grupos" (click)="seleccionar(grupo)">
       <label class="labelGrupo">{{grupo.nombre}} {{grupo.descripcion}}</label>
       <button ion-button color="light" class="btnOptions" (click)="editar(grupo)">
         <ion-icon name="options"></ion-icon>

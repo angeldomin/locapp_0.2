@@ -13,18 +13,11 @@ import { Grupo } from '../../models/grupo';
 export class BleServiceProvider {
 
     // public dispositivosSalida$: Observable<any[]>; // observable para recuperar los dispositivos que encontramos al escanear
-<<<<<<< HEAD
     public dispositivosSalida: Dispositivo[];
     public dispositivosSalida$ = new Subject<Dispositivo[]>();
 
-    public paresUsuarioRSSI: ParUsuarioRSSI[];
+    public paresUsuarioRSSI: ParUsuarioRSSI[]; 
     public paresUsuarioRSSISalida$ = new Subject<ParUsuarioRSSI[]>();
-=======
-    public dispositivosSalida: Dispositivo[]; 
-    public dispositivosSalida$ = new Subject<Dispositivo[]>();
-
-    public dispositivosScan: Dispositivo[];
->>>>>>> 0a076f2da5be43d3fed2c48e7009d8eeb63691e3
 
   constructor(
     public http: HttpClient,
@@ -32,12 +25,8 @@ export class BleServiceProvider {
     private toastCtrl: ToastController 
   ) {
     this.dispositivosSalida = [];
-<<<<<<< HEAD
     this.paresUsuarioRSSI = [];
   }  
-=======
-  }   
->>>>>>> 0a076f2da5be43d3fed2c48e7009d8eeb63691e3
 
   scan() {
     console.log('escaneando'); 
@@ -67,22 +56,6 @@ export class BleServiceProvider {
               });
             toast.present();
         }, 
-<<<<<<< HEAD
-        () => {
-            console.log('not connected');
-            this._ble.connect(uuid).subscribe(
-                peripheralData => { 
-                    console.log(peripheralData);
-                    setInterval(()=>{ this._ble.readRSSI(uuid).then(
-                        rssi => {
-                            console.log('RSSI -> ', rssi);
-                            
-                        }, error => {
-                            console.log(error);                        
-                        }); 
-                    
-                    }, 1000);
-=======
         () => {   
             console.log('not connected');
             this._ble.connect(uuid).subscribe( 
@@ -102,7 +75,6 @@ export class BleServiceProvider {
                                 });
                         }                    
                     }, 1000);                    
->>>>>>> 0a076f2da5be43d3fed2c48e7009d8eeb63691e3
                 }, peripheralData => { 
                     console.log('disconnected'); 
                 });
@@ -110,7 +82,6 @@ export class BleServiceProvider {
     );      
   }
 
-<<<<<<< HEAD
   multiconect(grupo: Grupo) {
 
     grupo.usuarios.forEach(usuario => {
@@ -126,7 +97,7 @@ export class BleServiceProvider {
                         par.rssi = rssi;
                     }, error => {
                         console.log(error);                        
-                    }); 
+                    });
                 
                 }, 1000);
             }, peripheralData => {
@@ -134,10 +105,6 @@ export class BleServiceProvider {
             });
     });
     
-=======
-  multiconect(listaDispositivos) {
-
->>>>>>> 0a076f2da5be43d3fed2c48e7009d8eeb63691e3
   }
  
 }
