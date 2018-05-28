@@ -4,6 +4,7 @@ export class Dispositivo {
         public uuid: string,
         public nombre_dispositivo: string,
         public descripcion: string,
-        public enUso: boolean
+        public enUso: boolean,
+        public rssi: number
     ) {}
 }

@@ -7,28 +7,29 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
-@Injectable()
+@Injectable() 
 export class BleServiceProvider {
 
     // public dispositivosSalida$: Observable<any[]>; // observable para recuperar los dispositivos que encontramos al escanear
-    public dispositivosSalida: Dispositivo[];
-
+    public dispositivosSalida: Dispositivo[]; 
     public dispositivosSalida$ = new Subject<Dispositivo[]>();
+
+    public dispositivosScan: Dispositivo[];
 
   constructor(
     public http: HttpClient,
     private _ble: BLE,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController 
   ) {
     this.dispositivosSalida = [];
-  }  
+  }   
 
   scan() {
     console.log('escaneando'); 
     this.dispositivosSalida = [];
     this._ble.scan([], 5).subscribe(response => {
         console.log(response);      
-        this.dispositivosSalida.push(new Dispositivo('', response.id, response.name, '', false));
+        this.dispositivosSalida.push(new Dispositivo('', response.id, response.name, '', false, 0));
         this.dispositivosSalida$.next(this.dispositivosSalida);  
         console.log(this.dispositivosSalida);      
     });
@@ -51,54 +52,38 @@ export class BleServiceProvider {
               });
             toast.present();
         }, 
-        () => { 
+        () => {   
             console.log('not connected');
-            this._ble.connect(uuid).subscribe(
-                peripheralData => { 
-                    console.log(peripheralData);
-                    // a cada segundo lanzamos la llamada (PROBAR)
-                    /*
-                    setInterval(function(){ this._ble.readRSSI(uuid).then(
-                        rssi => {
-                            console.log('RSSI -> ', rssi);
-                        }, error => {
-                            console.log(error);                        
-                        }); 
-                    
-                    }, 1000);*/
-
-                    // console.log('RSSI ->', this._ble.readRSSI(uuid));
-
-                    // lanzamos una vez la llamada (PROBAR si continúa o solo lo hace una vez)
-                    this._ble.readRSSI(uuid).then(
-                        rssi => {
-                            console.log('RSSI -> ', rssi);
-                        }, error => {
-                            console.log(error);                        
-                        });
-                    
+            this._ble.connect(uuid).subscribe( 
+                peripheralData => {
+                    console.log(peripheralData);                   
+                    let leyendo = false;
+                    setInterval(()=>{
+                        if (!leyendo) {
+                            leyendo = true;
+                            this._ble.readRSSI(uuid).then(
+                                rssi => {
+                                    console.log(uuid+' RSSI -> ', rssi);
+                                    leyendo = false;
+                                }, error => {
+                                    console.log(error); 
+                                    leyendo = false;        
+                                });
+                        }                    
+                    }, 1000);                    
                 }, peripheralData => { 
                     console.log('disconnected'); 
                 });
-            // this._ble.connect(uuid); console.log('-- Conectamos al dispositivo ', uuid);
-            // // emepzar a leer la señal cada x milisegundos
-            // console.log('RSSI ->', this._ble.readRSSI(uuid));
-            // this._ble.readRSSI(uuid)
         } 
-    );
+    );      
+  }
 
-            /*
-    if (this._ble.isConnected(uuid)) {
-        this._ble.disconnect(uuid); console.log('xx Nos desconectamos del dispositivo ', uuid);
-    } else {
-        this._ble.connect(uuid); console.log('-- Conectamos al dispositivo ', uuid);
-        // emepzar a leer la señal cada x milisegundos
-        console.log('RSSI ->', this._ble.readRSSI(uuid));
-    }*/
-      
+  multiconect(listaDispositivos) {
+
   }
  
 }
+
 
 
 /* información de: https://ionicframework.com/docs/native/ble/
