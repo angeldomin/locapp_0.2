@@ -36,19 +36,10 @@ export class DispositivosPage {
     this.dispositivos = [];
   }
 
-      /**/
-
   ionViewDidLoad() {    
     this.usuario = this.navParams.get('usuario');
     this.callback = this.navParams.get('callback');
-/*
-    this.dispositivosRef = this._bleService.dispositivosSalida$.subscribe(response => {
-      console.log(response);
-      this.dispositivos = response;
-    })*/
-
-    // this.dispositivos$ = this._bleService.getClientes$();
-    // this.dispositivos$.subscribe(dispositivos => this.dispositivos = dispositivos);
+    
     this.dispositivosRef = this._bleService.dispositivosSalida$.subscribe(response => {
       // debugger;
       this.dispositivos = response;

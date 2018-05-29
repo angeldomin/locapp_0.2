@@ -12,35 +12,41 @@ import { Grupo } from '../../models/grupo';
 @Injectable() 
 export class BleServiceProvider {
 
-    // public dispositivosSalida$: Observable<any[]>; // observable para recuperar los dispositivos que encontramos al escanear
-    public dispositivosSalida: Dispositivo[];
-    public dispositivosSalida$ = new Subject<Dispositivo[]>();
+    public paresRSSI: ParUsuarioRSSI[];
+    public dispositivos : Dispositivo[];
 
-    public paresUsuarioRSSI: ParUsuarioRSSI[]; 
-    public paresUsuarioRSSISalida$ = new Subject<ParUsuarioRSSI[]>();
+    // public dispositivosSalida$: Observable<any[]>; // observable para recuperar los dispositivos que encontramos al escanear
+    // public dispositivosSalida: Dispositivo[];
+    // public dispositivosSalida$ = new Subject<Dispositivo[]>();
+    public dispositivosSalida = new Subject<any>();
+    public dispositivosSalida$ = this.dispositivosSalida.asObservable();
+
+    // public paresUsuarioRSSI: ParUsuarioRSSI[]; 
+    // public paresUsuarioRSSISalida$ = new Subject<ParUsuarioRSSI[]>();
+    // Observable como lo hago en el curro
+    private paresUsuarioRSSI = new Subject<any>();
+    public paresUsuarioRSSISalida$ = this.paresUsuarioRSSI.asObservable();
 
   constructor(
     public http: HttpClient,
     private _ble: BLE,
     private toastCtrl: ToastController 
   ) {
-    this.dispositivosSalida = [];
-    this.paresUsuarioRSSI = [];
+    // this.dispositivosSalida = [];
+    this.dispositivos = [];
+    // this.paresUsuarioRSSI = [];
+    this.paresRSSI = [];
   }  
 
   scan() {
     console.log('escaneando'); 
-    this.dispositivosSalida = [];
+    this.dispositivos = [];
     this._ble.scan([], 5).subscribe(response => {
         console.log(response);      
-        this.dispositivosSalida.push(new Dispositivo('', response.id, response.name, '', false, 0));
-        this.dispositivosSalida$.next(this.dispositivosSalida);  
-        console.log(this.dispositivosSalida);      
+        this.dispositivos.push(new Dispositivo('', response.id, response.name, '', false, 0));
+        this.dispositivosSalida.next(this.dispositivos);  
+        console.log(this.dispositivos);  
     });
-  }
-
-  getClientes$(): Observable<Dispositivo[]> {
-    return this.dispositivosSalida$.asObservable();
   }
 
   conectar(uuid) {
@@ -85,17 +91,17 @@ export class BleServiceProvider {
   multiconect(grupo: Grupo) {
 
     grupo.usuarios.forEach(usuario => {
-        this.paresUsuarioRSSI.push(new ParUsuarioRSSI(usuario.nombre, usuario.id_dispositivo, 0, false, false));
+        this.paresRSSI.push(new ParUsuarioRSSI(usuario.nombre, usuario.id_dispositivo, 0, false, false));
     });
 
-    this.paresUsuarioRSSI.forEach(par => {
+    this.paresRSSI.forEach(par => {
         this._ble.connect(par.uuid).subscribe(
             peripheralData => {                 
                 setInterval(()=>{ this._ble.readRSSI(par.uuid).then(
                     rssi => {
                         console.log(par.usuario, ' --- RSSI -> ', rssi);
                         par.rssi = rssi;
-                        this.paresUsuarioRSSISalida$.next(this.paresUsuarioRSSI);
+                        this.paresUsuarioRSSI.next(this.paresRSSI);
                     }, error => {
                         console.log(error);                        
                     });
@@ -111,6 +117,7 @@ export class BleServiceProvider {
     grupo.usuarios.forEach(usuario => {
         this._ble.disconnect(usuario.id_dispositivo);
     });
+    this.paresRSSI = [];
   }
  
 }

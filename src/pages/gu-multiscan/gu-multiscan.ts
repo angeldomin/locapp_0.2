@@ -17,7 +17,7 @@ export class GuMultiscanPage {
   grupo: Grupo;
   listaUsuarioRSSI: ParUsuarioRSSI[];
   conectado = false;
-  paresUsuarioRSSIRef: Subscription;
+  paresUsuarioRSSIRef: Subscription  = null;
 
   constructor(
     public navCtrl: NavController,
@@ -41,6 +41,7 @@ export class GuMultiscanPage {
     console.log('ionViewDidLoad GuMultiscanPage');
     this.paresUsuarioRSSIRef = this._bleService.paresUsuarioRSSISalida$.subscribe(response => {
       this.listaUsuarioRSSI = response;
+      /* ¿Comprobar si debe pitar y demás aquí? */
     });
   }  
 
