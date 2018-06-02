@@ -59,7 +59,7 @@ export class BleServiceProvider {
                 message: 'The peripheral disconnected',
                 duration: 3000,
                 position: 'middle'
-              });
+              }); 
             toast.present();
         }, 
         () => {   

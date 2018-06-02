@@ -11,8 +11,9 @@
     <!-- lista de usuarios de este grupo -->
     <ion-list>
       <div ion-item *ngFor="let parUsuarioRSSI of listaUsuarioRSSI">
-        <label>{{parUsuarioRSSI.nombre}}</label>
-        <label>{{parUsuarioRSSI.rssi}}</label>
+        <label>{{parUsuarioRSSI.usuario}}</label>
+        <label> {{parUsuarioRSSI.rssi}}</label>
+        <button ion-button color="primary" class="btnBuscar" (click)='buscar(parUsuarioRSSI)'>Buscar</button>
         <!-- botoncito de mute??? para parar el sonido de alerta-->
       </div>
     </ion-list>
