@@ -4,6 +4,7 @@ import { Grupo } from '../../models/grupo';
 import { ParUsuarioRSSI } from '../../models/par-usuario-rssi';
 import { Subscription } from 'rxjs/Subscription';
 import { BLE } from '@ionic-native/ble';
+import { AudioServiceProvider } from '../../providers/audio-service/audio-service';
 
 @IonicPage()
 @Component({
@@ -21,6 +22,7 @@ export class GuMultiscanPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public audioService: AudioServiceProvider,
     private _ble: BLE,
     private toastCtrl: ToastController
   ) {
@@ -81,7 +83,8 @@ export class GuMultiscanPage {
     });
     this.grupo.usuarios.forEach(usuario => {
       this._ble.disconnect(usuario.id_dispositivo);
-    });    
+    });
+    this.stopWarning();
   }
 
   buscar(par: ParUsuarioRSSI) {
@@ -90,8 +93,11 @@ export class GuMultiscanPage {
       this._ble.readRSSI(par.uuid).then(
       rssi => {
         console.log(par.uuid+' RSSI -> ', rssi);
-        // this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = rssi;
-        this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = this.rssi2meter(rssi, 62, 2);
+        this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = rssi;
+        // this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = this.rssi2meter(rssi, 62, 4);
+        if (rssi<-86) {
+          this.warning();
+        }
       }, error => {
         console.log(error); 
       });                                                 
@@ -100,9 +106,25 @@ export class GuMultiscanPage {
 
   // RSSI to meter convertor
   rssi2meter(rssi, A, n) {
-    A=62;
-    n=4.21
+    // A=62;
+    // n=4.21
     return Math.pow(10, (-(rssi+A)/(10.0*n)));
+  }
+
+  warning() { console.log('warning pulsado');
+    this.audioService.warning();
+  }
+
+  stopWarning() {
+    this.audioService.stopWarning();
+  }
+
+  danger() { console.log('danger pulsado');
+    this.audioService.danger();
+  }
+
+  stopDanger() {
+    this.audioService.stopDanger();
   }
   
 
