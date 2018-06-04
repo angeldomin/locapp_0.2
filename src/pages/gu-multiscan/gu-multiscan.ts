@@ -18,6 +18,7 @@ export class GuMultiscanPage {
   conectado = false;
   paresUsuarioRSSIRef: Subscription  = null;
   intervals: number[];
+  aviso1: boolean;
 
   constructor(
     public navCtrl: NavController,
@@ -37,6 +38,7 @@ export class GuMultiscanPage {
       this.listaUsuarioRSSI.push(new ParUsuarioRSSI(usuario.nombre, usuario.id_dispositivo, 0, false, false));
       this.intervals.push(-1);
     });
+    this.aviso1=false;
     
   }
 
@@ -84,7 +86,7 @@ export class GuMultiscanPage {
     this.grupo.usuarios.forEach(usuario => {
       this._ble.disconnect(usuario.id_dispositivo);
     });
-    this.stopWarning();
+    this.stopWarning();    
   }
 
   buscar(par: ParUsuarioRSSI) {
@@ -113,10 +115,12 @@ export class GuMultiscanPage {
 
   warning() { console.log('warning pulsado');
     this.audioService.warning();
+    this.aviso1 = true;
   }
 
   stopWarning() {
     this.audioService.stopWarning();
+    this.aviso1 = false;
   }
 
   danger() { console.log('danger pulsado');

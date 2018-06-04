@@ -14,6 +14,7 @@
         <label>{{parUsuarioRSSI.usuario}}</label>
         <label> {{parUsuarioRSSI.rssi}}</label>
         <button ion-button color="primary" class="btnBuscar" (click)='buscar(parUsuarioRSSI)'>Buscar</button>
+        <button *ngIf="aviso1" ion-button color="danger" class="btnMute" (click)='stopWarning()'>Mute</button>
         <!-- botoncito de mute??? para parar el sonido de alerta-->
       </div>
     </ion-list>
