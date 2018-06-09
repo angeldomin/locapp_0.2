@@ -45,7 +45,7 @@ export class DispositivosPage {
       this.dispositivos = response;
     });
     
-         
+    this.buscar();   
 
     /* Buscamos dispositivos guardados anteriormente.
       puede que tengamos que diferenciar los que están asignados de los que no y mostrar algo distinto (color o icono) 
@@ -70,7 +70,7 @@ export class DispositivosPage {
     this._bleService.scan();        
   }
 
-  registrar(dispositivo: Dispositivo) { debugger;
+  registrar(dispositivo: Dispositivo) { //debugger;
     this.usuario.id_dispositivo = dispositivo.uuid;
     // hacemos uso de callback para pasar el usuario modificado con el id del dispositivo   
     this.callback(this.usuario).then(()=>{      

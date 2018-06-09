@@ -97,8 +97,22 @@ export class GuMultiscanPage {
         console.log(par.uuid+' RSSI -> ', rssi);
         this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = rssi;
         // this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = this.rssi2meter(rssi, 62, 4);
-        if (rssi<-86) {
+        if (rssi<-75) {
           this.warning();
+          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=true;
+          this.stopDanger();
+          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false;
+        }
+        if (rssi<-85) {
+          this.danger();
+          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=true;
+          this.stopWarning();
+          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
+        }
+        if (rssi>-65) {
+          this.stopDanger(); this.stopWarning();
+          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false; 
+          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
         }
       }, error => {
         console.log(error); 
@@ -123,7 +137,7 @@ export class GuMultiscanPage {
     this.aviso1 = false;
   }
 
-  danger() { console.log('danger pulsado');
+  danger() { console.log('danger pulsado');   
     this.audioService.danger();
   }
 

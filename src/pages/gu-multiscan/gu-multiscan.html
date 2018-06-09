@@ -1,13 +1,15 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>gu-multiscan</ion-title>
+    <ion-title>Escaneo de grupo</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
     <ion-title>{{grupo.nombre}}</ion-title><!-- botoncito de editar??? para ir directamente -->
+  <div>
 
+  </div>
     <!-- lista de usuarios de este grupo -->
     <ion-list>
       <div ion-item *ngFor="let parUsuarioRSSI of listaUsuarioRSSI">
@@ -15,6 +17,7 @@
         <label> {{parUsuarioRSSI.rssi}}</label>
         <button ion-button color="primary" class="btnBuscar" (click)='buscar(parUsuarioRSSI)'>Buscar</button>
         <button *ngIf="aviso1" ion-button color="danger" class="btnMute" (click)='stopWarning()'>Mute</button>
+        <button *ngIf="parUsuarioRSSI.danger" ion-button color="danger" class="btnMute" (click)='stopDanger()'>Mute</button>
         <!-- botoncito de mute??? para parar el sonido de alerta-->
       </div>
     </ion-list>

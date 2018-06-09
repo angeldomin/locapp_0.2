@@ -49,12 +49,24 @@ export class ListPage {
     if (this.grupo.usuarios.indexOf(usuario) >= 0){
       // quitamos del grupo al usuario
       this.grupo.usuarios.splice(this.grupo.usuarios.indexOf(usuario), 1);
+      let alert = this.alertCtrl.create({
+        title: 'Usuario desvinculado',
+        subTitle: 'Usuario borrado del grupo.',
+        buttons: ['Cerrar']
+      });
+      alert.present();
     } else {
       // añadimos el usuario al grupo
       this.grupo.usuarios.push(usuario);
+      let alert = this.alertCtrl.create({
+        title: 'Usuario añadido',
+        subTitle: 'Usuario añadido al grupo.',
+        buttons: ['Cerrar']
+      });
+      alert.present();
     }
     // actualizamos en base de datos
-    this._firebaseService.editGrupo(this.grupo);
+    this._firebaseService.editGrupo(this.grupo);    
   }
   
   buscar(usuario) {

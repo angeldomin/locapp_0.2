@@ -6,6 +6,7 @@ import { FirebaseServiceProvider } from '../../providers/firebase-service/fireba
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { UsuarioPage } from '../usuario/usuario';
 import { ListPage } from '../list/list';
+import { Usuario } from '../../models/usuario';
 
 @IonicPage()
 @Component({
@@ -60,9 +61,9 @@ export class GuAltaEditGruposPage {
     }
     // his.navCtrl.push(ListPage, {grupo: this.grupo});
     // setTimeout(this.navCtrl.push(ListPage, {grupo: this.grupo}), 5000);
-    setTimeout(() => {
+    //setTimeout(() => {
       this.navCtrl.push(ListPage, {grupo: this.grupo});
-     }, 5000);
+    // }, 5000);
   }
 
   guardar() {
@@ -100,6 +101,10 @@ export class GuAltaEditGruposPage {
   volver() {
     console.log('Volver');
     this.navCtrl.pop();
+  }
+
+  borrar(usuario: Usuario) {
+    
   }
 
 }

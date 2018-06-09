@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content padding>  
-  <div> <!-- dispositivos registrados anteriormente -->
+  <!--<div>  dispositivos registrados anteriormente 
     <ion-label>Dispositivos conocidos:</ion-label>
     <ion-list>
         <button ion-item *ngFor="let dispositivo of dispositivosConocidos" (click)="registrar(dispositivo)">      
@@ -16,12 +16,14 @@
         </button>
     </ion-list>
   </div>
-  <br><br>
-  <button ion-button (click)="buscar()">Buscar dispositivos Bluetooth</button>
-  <button ion-button (click)="hola()">Console</button>
+  <br><br>-->
   <ion-list>
     <div ion-item *ngFor="let dispositivo of dispositivos" (click)="registrar(dispositivo)">      
       {{dispositivo.nombre_dispositivo || 'Unnamed'}} {{dispositivo.descripcion}}  
     </div>
   </ion-list>
+  <div padding>
+    <button ion-button block (click)="buscar()">Buscar dispositivos Bluetooth</button>
+    <button ion-button block (click)="hola()">Refrescar lista</button>
+  </div>    
 </ion-content>
