@@ -157,9 +157,9 @@ export class FirebaseServiceProvider {
           pass
         });
         newPostRef.child("_id").set(newPostRef.key);        
-
+        return true;
       }, error => {
-        this.loading.dismiss().then( () => {
+        //this.loading.dismiss().then( () => {
           let alert = this.alertCtrl.create({
             message: error.message,
             buttons: [
@@ -170,7 +170,8 @@ export class FirebaseServiceProvider {
             ]
           });
           alert.present();
-        });
+        //});
+        return false;
       });       
   }
 

@@ -11,28 +11,46 @@
 
   </div>
     <!-- lista de usuarios de este grupo -->
-    <ion-list>
+    <ion-list style="margin-top: 5%">
       <div ion-item *ngFor="let parUsuarioRSSI of listaUsuarioRSSI">
-        <label>{{parUsuarioRSSI.usuario}}</label>
-        <label> {{parUsuarioRSSI.rssi}}</label>
-        <button ion-button color="primary" class="btnBuscar" (click)='buscar(parUsuarioRSSI)'>Buscar</button>
-        <button *ngIf="aviso1" ion-button color="danger" class="btnMute" (click)='stopWarning()'>Mute</button>
-        <button *ngIf="parUsuarioRSSI.danger" ion-button color="danger" class="btnMute" (click)='stopDanger()'>Mute</button>
+        <div *ngIf="!parUsuarioRSSI.warning && !parUsuarioRSSI.danger">
+          <label>{{parUsuarioRSSI.usuario}}</label>
+          <label> {{parUsuarioRSSI.rssi}}</label>
+          <button ion-button color="primary" class="btnBuscar" (click)='buscar(parUsuarioRSSI)'>Buscar</button>
+          <button ion-button color="primary" class="btnBuscar" (click)='radar(parUsuarioRSSI)'>Radar</button>
+        </div>
+        <div *ngIf="parUsuarioRSSI.warning" style="background-color: yellow">
+            <label>{{parUsuarioRSSI.usuario}}</label>
+            <label> {{parUsuarioRSSI.rssi}}</label>
+            <label style="margin-left: 5px;">WARNING</label>
+            <button ion-button color="primary" class="btnBuscar" (click)='buscar(parUsuarioRSSI)'>Buscar</button>
+            <button ion-button color="primary" class="btnBuscar" (click)='radar(parUsuarioRSSI)'>Radar</button>
+            <button *ngIf="aviso1" ion-button color="danger" class="btnMute" (click)='stopWarning()'>Mute</button>
+        </div>
+        <div *ngIf="parUsuarioRSSI.danger" style="background-color: red">
+            <label>{{parUsuarioRSSI.usuario}}</label>
+            <label> {{parUsuarioRSSI.rssi}}</label>            
+            <label style="margin-left: 5px;">DANGER</label>
+            <button ion-button color="primary" class="btnBuscar" (click)='buscar(parUsuarioRSSI)'>Buscar</button>
+            <button ion-button color="primary" class="btnBuscar" (click)='radar(parUsuarioRSSI)'>Radar</button>
+            <button *ngIf="aviso1" ion-button color="danger" class="btnMute" (click)='stopWarning()'>Mute</button>
+        </div>
+        <!-- <button *ngIf="parUsuarioRSSI.danger" ion-button color="danger" class="btnMute" (click)='stopDanger()'>Mute</button> -->
         <!-- botoncito de mute??? para parar el sonido de alerta-->
       </div>
     </ion-list>
 
     <!-- conectar y desconectar -->
-    <div padding *ngIf="!conectado">
-      <button ion-button color="primary" block class="btnConectar" (click)='conectar()'>Conectar</button>
+    <div padding *ngIf="!conectado" style="text-align: center">
+      <button ion-button color="light" class="btnConectar" (click)='conectar()'>Conectar</button>
     </div>
-    <div padding *ngIf="conectado">
-      <button ion-button color="primary" block class="btnDesconectar" (click)='desconectar()'>Desconectar</button>
+    <div padding *ngIf="conectado" style="text-align: center">
+      <button ion-button color="light" class="btnDesconectar" (click)='desconectar()'>Desconectar</button>
     </div>
 
     <!-- volver -->
-    <div padding>
-      <button ion-button color="primary" block class="btnVolver" (click)='volver()'>Volver</button>
+    <div padding style="text-align: center">     
+      <button ion-button color="light"  class="btnVolver" (click)='volver()'>Volver</button>
     </div>
 
 </ion-content>

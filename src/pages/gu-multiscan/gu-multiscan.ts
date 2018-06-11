@@ -5,6 +5,8 @@ import { ParUsuarioRSSI } from '../../models/par-usuario-rssi';
 import { Subscription } from 'rxjs/Subscription';
 import { BLE } from '@ionic-native/ble';
 import { AudioServiceProvider } from '../../providers/audio-service/audio-service';
+import { Subject } from 'rxjs/Subject';
+import { BuscadorPage } from '../buscador/buscador';
 
 @IonicPage()
 @Component({
@@ -19,6 +21,11 @@ export class GuMultiscanPage {
   paresUsuarioRSSIRef: Subscription  = null;
   intervals: number[];
   aviso1: boolean;
+
+  private warnings = new Subject<any>();
+  public warningsSalida$ = this.warnings.asObservable();
+
+  warningsRef: Subscription;
 
   constructor(
     public navCtrl: NavController,
@@ -40,6 +47,30 @@ export class GuMultiscanPage {
     });
     this.aviso1=false;
     
+    this.warningsRef = this.warningsSalida$.subscribe(response => {     // debugger;
+      response.forEach(element => {
+        let warning = false;
+        let danger = false;
+        if (element.warning && !element.danger) {         
+          warning = true;
+        }
+        if (element.danger) {
+          danger = true;
+        } 
+        if (warning) {
+          this.warning();
+        } else {
+          this.stopWarning();
+        }
+        if (danger) {
+          this.danger();
+        } else {
+          this.stopDanger();
+        }
+      });
+    });
+    
+
   }
 
   ionViewDidLoad() {
@@ -78,7 +109,7 @@ export class GuMultiscanPage {
     console.log(this.listaUsuarioRSSI);
   }
 
-  desconectar() {
+  desconectar() {console.log(this.listaUsuarioRSSI);
     this.conectado = false;   
     this.intervals.forEach(interval => {
       clearInterval(interval);
@@ -89,7 +120,8 @@ export class GuMultiscanPage {
     this.stopWarning();    
   }
 
-  buscar(par: ParUsuarioRSSI) {
+
+  buscar(par: ParUsuarioRSSI) { 
     this.intervals[this.listaUsuarioRSSI.indexOf(par)] =
     setInterval(()=>{
       this._ble.readRSSI(par.uuid).then(
@@ -97,23 +129,24 @@ export class GuMultiscanPage {
         console.log(par.uuid+' RSSI -> ', rssi);
         this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = rssi;
         // this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = this.rssi2meter(rssi, 62, 4);
-        if (rssi<-75) {
-          this.warning();
+        if (rssi<-77) { 
+          //this.warning();
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=true;
-          this.stopDanger();
+          //this.stopDanger();
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false;
         }
-        if (rssi<-85) {
-          this.danger();
+        if (rssi<-80) {
+          //this.danger();
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=true;
-          this.stopWarning();
+          //this.stopWarning();
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
         }
-        if (rssi>-65) {
-          this.stopDanger(); this.stopWarning();
+        if (rssi>-75) {
+          //this.stopDanger(); this.stopWarning();
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false; 
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
         }
+        this.warnings.next(this.listaUsuarioRSSI);
       }, error => {
         console.log(error); 
       });                                                 
@@ -148,6 +181,10 @@ export class GuMultiscanPage {
 
   volver() {
     this.navCtrl.pop();
+  }
+
+  radar(par) {
+    this.navCtrl.push(BuscadorPage, {par: ParUsuarioRSSI});
   }
 
 }

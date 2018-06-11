@@ -1,6 +1,7 @@
 import { Component,  ElementRef,  ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Usuario } from '../../models/usuario';
+import { ParUsuarioRSSI } from '../../models/par-usuario-rssi';
 
 /**
  * Generated class for the BuscadorPage page.
@@ -26,14 +27,15 @@ export class BuscadorPage {
   /** Reference the context for the Canvas element  */
   private _CONTEXT : any;
 
+  parUsuarioSSID: ParUsuarioRSSI;
   usuario: Usuario;
   modo: String;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    if (navParams.get('usuario')) {
-      this.usuario = navParams.get('usuario');
+    if (navParams.get('par')) {
+      this.parUsuarioSSID = navParams.get('par'); console.log(this.parUsuarioSSID);
     } else {
-      this.usuario = new Usuario('', '', '', '', 0, '', '');
+      this.parUsuarioSSID = new ParUsuarioRSSI('', '', 0, false, false);
     }    
     
   }

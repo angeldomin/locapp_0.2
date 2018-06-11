@@ -56,15 +56,16 @@ export class SuAltaEditPage {
 
   guardar() {
     if (this.modo === 'new') {      
-      this._firebaseService.newProfesional(this.profesional);
-      console.log('Nuevo profesional dado de alta correctamente.');
-      let alert = this.alertCtrl.create({
-        title: 'Profesional creado.',
-        subTitle: 'El nuevo profesional '+this.profesional.user+' ha sido dado de alta correctamente.',
-        buttons: ['Aceptar']
-      });
-      alert.present();
-      this.navCtrl.pop();
+      if (this._firebaseService.newProfesional(this.profesional)) { // si el alta ha sido correcta devuelve true
+        console.log('Nuevo profesional dado de alta correctamente.');
+        let alert = this.alertCtrl.create({
+          title: 'Profesional creado.',
+          subTitle: 'El nuevo profesional '+this.profesional.user+' ha sido dado de alta correctamente.',
+          buttons: ['Aceptar']
+        });
+        alert.present();
+        this.navCtrl.pop();
+      }
     } else if (this.modo === 'edit') {
       this._firebaseService.editProfesional(this.profesional);
       console.log('Edición de profesional correcta.');

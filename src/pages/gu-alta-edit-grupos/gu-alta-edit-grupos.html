@@ -40,7 +40,7 @@
     </ion-list> 
   </form>
   <div class="foot" padding>
-    <button ion-button color="light" block (click)="guardar()" [disabled]="!grupoForm.valid">Confirmar</button>
-    <button ion-button color="primary" block class="btnVolver" (click)='volver()'>Cancelar</button>
+    <button ion-button color="light" (click)="guardar()" [disabled]="!grupoForm.valid">Confirmar</button>
+    <button ion-button color="light" class="btnVolver" (click)='volver()'>Cancelar</button>
   </div>
 </ion-content>
