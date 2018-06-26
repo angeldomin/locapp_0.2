@@ -139,16 +139,19 @@ export class GuMultiscanPage {
       this._ble.readRSSI(par.uuid).then(
       rssi => {
         console.log(par.uuid+' RSSI -> ', rssi);
-        this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = rssi;
-        if (rssi < -this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].distancia_warning) {
+        // en vez de guardar el valor que llega guardamos la media entre el que llega y el que tenemos
+        this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = (this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi + rssi)/2;
+        console.log(par.uuid+' MEDIA RSSI -> ', this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi);
+
+        if (this.rssi2meter(rssi) >= this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].distancia_warning) {
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=true;
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false;
         }
-        if (rssi<-this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].distancia_danger) {
+        if (this.rssi2meter(rssi) >= this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].distancia_danger) {
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=true;
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
         }
-        if (rssi>-66) {
+        if (this.rssi2meter(rssi) <= this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].distancia_warning) {
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false; 
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
         }
@@ -173,10 +176,11 @@ export class GuMultiscanPage {
   }
 
   // RSSI to meter convertor
-  rssi2meter(rssi, A, n) {
-    // A=62;
-    // n=4.21
-    return Math.pow(10, (-(rssi+A)/(10.0*n)));
+  rssi2meter(rssi) {
+    const A=60;
+    const N=2;
+    return Math.trunc(Math.pow(10, ((A-rssi)/(10.0*N))));
+    // https://iotandelectronics.wordpress.com/2016/10/07/how-to-calculate-distance-from-the-rssi-value-of-the-ble-beacon/
   }
 
   warning() { console.log('warning pulsado');

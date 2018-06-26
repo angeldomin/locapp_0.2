@@ -49,7 +49,7 @@ export class UsuarioPage {
 
   newUser(usuario: Usuario) {
     // conectamos con base de datos y damos de alta un nuevo usuario
-    if (usuario.distancia_danger === 1){
+    /*if (usuario.distancia_danger === 1){
       usuario.distancia_danger = 60;
     } else if (usuario.distancia_danger === 2){
       usuario.distancia_danger = 68;
@@ -94,13 +94,13 @@ export class UsuarioPage {
       usuario.distancia_warning = 88;
     } else if (usuario.distancia_warning > 10){
       usuario.distancia_warning = 90;
-    }
+    }*/
     this._firebaseService.newUsuario(usuario);
   }
 
   editUser(usuario: Usuario) { 
     // editamos los datos de un usuario existente 
-    if (usuario.distancia_danger == 1){
+    /*if (usuario.distancia_danger == 1){
       usuario.distancia_danger = 60;
     } else if (usuario.distancia_danger == 2){
       usuario.distancia_danger = 68;
@@ -145,7 +145,7 @@ export class UsuarioPage {
       usuario.distancia_warning = 88;
     } else if (usuario.distancia_warning > 10){
       usuario.distancia_warning = 90;
-    } console.log('----------->', usuario);
+    } console.log('----------->', usuario);*/
     this._firebaseService.editUsuario(usuario);
   }
 
