@@ -21,7 +21,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = LoginPage; 
 
   pages: Array<{title: string, component: any}>;
 

@@ -17,20 +17,15 @@
     <ion-item>
       <ion-label floating>Nombre</ion-label>
       <ion-input type="text" value="" [(ngModel)]="usuario.nombre"></ion-input>
+    </ion-item>   
+    <ion-item>
+      <ion-label floating>Distancia de Warning</ion-label>
+      <ion-input type="number" value="" [(ngModel)]="usuario.distancia_warning"></ion-input>
+    </ion-item>   
+    <ion-item>
+      <ion-label floating>Distancia de Danger</ion-label>
+      <ion-input type="number" value="" [(ngModel)]="usuario.distancia_danger"></ion-input>
     </ion-item>    
-    <ion-item>
-      <ion-label floating>Primer Apellido</ion-label>
-      <ion-input type="text" value="" [(ngModel)]="usuario.apellido1"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Segundo Apellido</ion-label>
-      <ion-input type="text" value="" [(ngModel)]="usuario.apellido2"></ion-input>
-    </ion-item>    
-    <ion-item>
-      <ion-label floating>Edad</ion-label>
-      <ion-input type="number" value="" [(ngModel)]="usuario.edad"></ion-input>
-    </ion-item>
-    <!-- si subimos imagen debe ir en este punto -->
   </ion-list>    
   <div class="divFoot" padding>
     <button ion-button color="light" (click)='asignarDispositivo()'>Asignar Dispositivo</button>

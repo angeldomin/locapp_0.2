@@ -35,7 +35,7 @@ export class BuscadorPage {
     if (navParams.get('par')) {
       this.parUsuarioSSID = navParams.get('par'); console.log(this.parUsuarioSSID);
     } else {
-      this.parUsuarioSSID = new ParUsuarioRSSI('', '', 0, false, false);
+      this.parUsuarioSSID = new ParUsuarioRSSI('', '', 0, 0, 0, false, false);
     }    
     
   }

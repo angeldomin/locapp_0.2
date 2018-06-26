@@ -39,35 +39,42 @@ export class GuMultiscanPage {
     } else {
       this.grupo = new Grupo('', '', []);
     }
+
+    // lanzo un scan porque si no no se pueden conectar después
+    this._ble.scan([], 10).subscribe(response => {
+      console.log(response);
+    });
+
     this.listaUsuarioRSSI = [];
     this.intervals = [];
     this.grupo.usuarios.forEach(usuario => {
-      this.listaUsuarioRSSI.push(new ParUsuarioRSSI(usuario.nombre, usuario.id_dispositivo, 0, false, false));
+      this.listaUsuarioRSSI.push(new ParUsuarioRSSI(usuario.nombre, usuario.id_dispositivo, 0, 
+        usuario.distancia_warning, usuario.distancia_danger, false, false));
       this.intervals.push(-1);
     });
     this.aviso1=false;
     
     this.warningsRef = this.warningsSalida$.subscribe(response => {     // debugger;
-      response.forEach(element => {
-        let warning = false;
-        let danger = false;
+      let warning = false;
+      let danger = false;
+      response.forEach(element => {      
         if (element.warning && !element.danger) {         
           warning = true;
         }
         if (element.danger) {
           danger = true;
-        } 
-        if (warning) {
-          this.warning();
-        } else {
-          this.stopWarning();
-        }
-        if (danger) {
-          this.danger();
-        } else {
-          this.stopDanger();
-        }
+        }        
       });
+      if (warning) {
+        this.warning();
+      } else {
+        this.stopWarning();
+      }
+      if (danger) {
+        this.danger();
+      } else {
+        this.stopDanger();
+      }
     });
     
 
@@ -117,7 +124,12 @@ export class GuMultiscanPage {
     this.grupo.usuarios.forEach(usuario => {
       this._ble.disconnect(usuario.id_dispositivo);
     });
-    this.stopWarning();    
+    this.stopWarning();
+    this.stopDanger();
+    for (let i = 0; i < this.listaUsuarioRSSI.length; i++) {
+      this.listaUsuarioRSSI[i].danger = false;
+      this.listaUsuarioRSSI[i].warning = false;
+    }
   }
 
 
@@ -128,29 +140,36 @@ export class GuMultiscanPage {
       rssi => {
         console.log(par.uuid+' RSSI -> ', rssi);
         this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = rssi;
-        // this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = this.rssi2meter(rssi, 62, 4);
-        if (rssi<-77) { 
-          //this.warning();
+        if (rssi < -this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].distancia_warning) {
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=true;
-          //this.stopDanger();
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false;
         }
-        if (rssi<-80) {
-          //this.danger();
+        if (rssi<-this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].distancia_danger) {
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=true;
-          //this.stopWarning();
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
         }
-        if (rssi>-75) {
-          //this.stopDanger(); this.stopWarning();
+        if (rssi>-66) {
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false; 
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
         }
+        // this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = this.rssi2meter(rssi, 62, 4);
+        /*if (rssi<-77) {
+          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=true;
+          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false;
+        }
+        if (rssi<-80) {
+          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=true;
+          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
+        }
+        if (rssi>-75) {
+          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false; 
+          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
+        }*/
         this.warnings.next(this.listaUsuarioRSSI);
       }, error => {
         console.log(error); 
       });                                                 
-    }, 1000); 
+    }, 700);
   }
 
   // RSSI to meter convertor
@@ -179,7 +198,8 @@ export class GuMultiscanPage {
   }
   
 
-  volver() {
+  volver() {    
+    this.desconectar();
     this.navCtrl.pop();
   }
 

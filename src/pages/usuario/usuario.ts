@@ -33,7 +33,7 @@ export class UsuarioPage {
     if (navParams.get('usuario')) {
       this.usuario = navParams.get('usuario');
     } else {
-      this.usuario = new Usuario('', '', '', '', 0, '', '');
+      this.usuario = new Usuario('', '', 0, 0, '');
     }
     if (navParams.get('mode')) {
       this.modo = navParams.get('mode');
@@ -49,11 +49,103 @@ export class UsuarioPage {
 
   newUser(usuario: Usuario) {
     // conectamos con base de datos y damos de alta un nuevo usuario
+    if (usuario.distancia_danger === 1){
+      usuario.distancia_danger = 60;
+    } else if (usuario.distancia_danger === 2){
+      usuario.distancia_danger = 68;
+    } else if (usuario.distancia_danger === 3){
+      usuario.distancia_danger = 71;
+    } else if (usuario.distancia_danger === 4){
+      usuario.distancia_danger = 73;
+    } else if (usuario.distancia_danger === 5){
+      usuario.distancia_danger = 77;
+    } else if (usuario.distancia_danger === 6){
+      usuario.distancia_danger = 80;
+    } else if (usuario.distancia_danger === 7){
+      usuario.distancia_danger = 82;
+    } else if (usuario.distancia_danger === 8){
+      usuario.distancia_danger = 84;
+    } else if (usuario.distancia_danger === 9){
+      usuario.distancia_danger = 86;
+    } else if (usuario.distancia_danger === 10){
+      usuario.distancia_danger = 88;
+    } else if (usuario.distancia_danger > 10){
+      usuario.distancia_danger = 90;
+    }
+    if (usuario.distancia_warning === 1){
+      usuario.distancia_warning = 60;
+    } else if (usuario.distancia_warning === 2){
+      usuario.distancia_warning = 68;
+    } else if (usuario.distancia_warning === 3){
+      usuario.distancia_warning = 71;
+    } else if (usuario.distancia_warning === 4){
+      usuario.distancia_warning = 73;
+    } else if (usuario.distancia_warning === 5){
+      usuario.distancia_warning = 77;
+    } else if (usuario.distancia_warning === 6){
+      usuario.distancia_warning = 80;
+    } else if (usuario.distancia_warning === 7){
+      usuario.distancia_warning = 82;
+    } else if (usuario.distancia_warning === 8){
+      usuario.distancia_warning = 84;
+    } else if (usuario.distancia_warning === 9){
+      usuario.distancia_warning = 86;
+    } else if (usuario.distancia_warning === 10){
+      usuario.distancia_warning = 88;
+    } else if (usuario.distancia_warning > 10){
+      usuario.distancia_warning = 90;
+    }
     this._firebaseService.newUsuario(usuario);
   }
 
-  editUser(usuario: Usuario) {
+  editUser(usuario: Usuario) { 
     // editamos los datos de un usuario existente 
+    if (usuario.distancia_danger == 1){
+      usuario.distancia_danger = 60;
+    } else if (usuario.distancia_danger == 2){
+      usuario.distancia_danger = 68;
+    } else if (usuario.distancia_danger == 3){
+      usuario.distancia_danger = 71;
+    } else if (usuario.distancia_danger == 4){
+      usuario.distancia_danger = 73;
+    } else if (usuario.distancia_danger == 5){
+      usuario.distancia_danger = 77;
+    } else if (usuario.distancia_danger == 6){
+      usuario.distancia_danger = 80;
+    } else if (usuario.distancia_danger == 7){
+      usuario.distancia_danger = 82;
+    } else if (usuario.distancia_danger == 8){
+      usuario.distancia_danger = 84;
+    } else if (usuario.distancia_danger == 9){
+      usuario.distancia_danger = 86;
+    } else if (usuario.distancia_danger == 10){
+      usuario.distancia_danger = 88;
+    } else if (usuario.distancia_danger > 10){
+      usuario.distancia_danger = 90;
+    } console.log('----------->', usuario);
+    if (usuario.distancia_warning == 1){
+      usuario.distancia_warning = 60;
+    } else if (usuario.distancia_warning == 2){
+      usuario.distancia_warning = 68;
+    } else if (usuario.distancia_warning == 3){
+      usuario.distancia_warning = 71;
+    } else if (usuario.distancia_warning == 4){
+      usuario.distancia_warning = 73;
+    } else if (usuario.distancia_warning == 5){
+      usuario.distancia_warning = 77;
+    } else if (usuario.distancia_warning == 6){
+      usuario.distancia_warning = 80;
+    } else if (usuario.distancia_warning == 7){
+      usuario.distancia_warning = 82;
+    } else if (usuario.distancia_warning == 8){
+      usuario.distancia_warning = 84;
+    } else if (usuario.distancia_warning == 9){
+      usuario.distancia_warning = 86;
+    } else if (usuario.distancia_warning == 10){
+      usuario.distancia_warning = 88;
+    } else if (usuario.distancia_warning > 10){
+      usuario.distancia_warning = 90;
+    } console.log('----------->', usuario);
     this._firebaseService.editUsuario(usuario);
   }
 

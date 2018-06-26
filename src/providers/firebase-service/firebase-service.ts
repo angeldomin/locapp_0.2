@@ -92,20 +92,16 @@ export class FirebaseServiceProvider {
         
     const _id = usuario._id;
     const nombre = usuario.nombre;
-    const apellido1 = usuario.apellido1;
-    const apellido2 = usuario.apellido2;
-    const edad = usuario.edad;
-    const imagen = usuario.image;
+    const distancia_warning = usuario.distancia_warning;
+    const distancia_danger = usuario.distancia_danger;
     const id_dispositivo = usuario.id_dispositivo;
     
     // mirar aquí https://firebase.google.com/docs/database/admin/save-data    
     var newPostRef = usuariosRef.push({
       _id,
       nombre,
-      apellido1,
-      apellido2,
-      edad,
-      imagen,
+      distancia_warning,
+      distancia_danger,
       id_dispositivo
     });
 
