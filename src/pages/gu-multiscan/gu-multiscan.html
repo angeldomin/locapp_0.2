@@ -6,38 +6,92 @@
 
 
 <ion-content padding>
-    <ion-title>{{grupo.nombre}}</ion-title><!-- botoncito de editar??? para ir directamente -->
+  <ion-title>
+    <ion-icon name="star" (click)="refrescar()"></ion-icon> {{grupo.nombre}}  
+  </ion-title><!-- botoncito de editar??? para ir directamente -->
   <div>
 
   </div>
     <!-- lista de usuarios de este grupo -->
     <ion-list style="margin-top: 5%">
       <div ion-item *ngFor="let parUsuarioRSSI of listaUsuarioRSSI">
-        <div *ngIf="!parUsuarioRSSI.warning && !parUsuarioRSSI.danger">
-          <label class="lbUsuario">{{parUsuarioRSSI.usuario}}</label>
-          <label> {{parUsuarioRSSI.rssi}}</label>
-          <button ion-button color="primary" class="btnBuscar" (click)='buscar(parUsuarioRSSI)'>Buscar</button>
+        <div *ngIf="!parUsuarioRSSI.warning && !parUsuarioRSSI.danger">                 
+          <!--<button ion-button color="primary" class="btnBuscar" (click)='buscar(parUsuarioRSSI)'>Buscar</button>-->
+          <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <label>{{parUsuarioRSSI.usuario}}</label>
+                </ion-col>                
+                <ion-col>
+                  <label><ion-icon name="warning"></ion-icon> {{parUsuarioRSSI.distancias.lower}}</label>
+                </ion-col>
+                <ion-col>
+                  <label><ion-icon name="alert"></ion-icon> {{parUsuarioRSSI.distancias.upper}}</label>
+                </ion-col>
+                <ion-col>
+                  <label> RSSI:{{parUsuarioRSSI.rssi}}</label>
+                </ion-col>
+              </ion-row>              
+            </ion-grid>
           <!--<button ion-button color="primary" class="btnBuscar" (click)='radar(parUsuarioRSSI)'>Radar</button>-->
-          <ion-item>
-            <ion-label>dual, step=1, snaps, </ion-label>
-            <ion-range dualKnobs="true" [(ngModel)]="dualValue2" min="1" max="25" step="1" snaps="true"></ion-range>
-          </ion-item>
+          <ion-item style="padding-left: 5px;">        
+            <ion-range dualKnobs="true" [(ngModel)]="parUsuarioRSSI.distancias" min="1" max="12" step="1" snaps="true" style="padding: 0%">
+                <ion-icon small range-left name="phone-portrait"></ion-icon>
+                <ion-icon range-right name="body"></ion-icon>                
+            </ion-range>
+          </ion-item> 
         </div>
         <div *ngIf="parUsuarioRSSI.warning" style="background-color: yellow">
-          <label class="lbUsuario">{{parUsuarioRSSI.usuario}}</label>
-          <label> {{parUsuarioRSSI.rssi}}</label>
-          <!--<label style="margin-left: 5px;">WARNING</label>-->
-          <button ion-button color="primary" class="btnBuscar" (click)='buscar(parUsuarioRSSI)'>Buscar</button>
-          <!--<button ion-button color="primary" class="btnBuscar" (click)='radar(parUsuarioRSSI)'>Radar</button>-->
-          <button *ngIf="aviso1" ion-button color="danger" class="btnMute" (click)='stopWarning()'>Mute</button>
+          <!--<button ion-button color="primary" class="btnBuscar" (click)='buscar(parUsuarioRSSI)'>Buscar</button>-->
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <label>{{parUsuarioRSSI.usuario}}</label>
+              </ion-col>                
+              <ion-col>
+                <label><ion-icon name="warning"></ion-icon> {{parUsuarioRSSI.distancias.lower}}</label>
+              </ion-col>
+              <ion-col>
+                <label><ion-icon name="alert"></ion-icon> {{parUsuarioRSSI.distancias.upper}}</label>
+              </ion-col>
+              <ion-col>
+                <label> RSSI:{{parUsuarioRSSI.rssi}}</label>
+              </ion-col>
+            </ion-row>              
+          </ion-grid>
+        <!--<button ion-button color="primary" class="btnBuscar" (click)='radar(parUsuarioRSSI)'>Radar</button>-->
+        <ion-item style="padding-left: 5px; background-color: rgb(245, 245, 121);">        
+          <ion-range dualKnobs="true" [(ngModel)]="parUsuarioRSSI.distancias" min="1" max="12" step="1" snaps="true" style="padding: 0%">
+              <ion-icon small range-left name="phone-portrait"></ion-icon>
+              <ion-icon range-right name="body"></ion-icon>                
+          </ion-range>
+        </ion-item> 
         </div>
         <div *ngIf="parUsuarioRSSI.danger" style="background-color: red">
-          <label class="lbUsuario">{{parUsuarioRSSI.usuario}}</label>
-          <label> {{parUsuarioRSSI.rssi}}</label>
-          <!--<label style="margin-left: 5px;">DANGER</label>-->
-          <button ion-button color="primary" class="btnBuscar" (click)='buscar(parUsuarioRSSI)'>Buscar</button>
-          <!--<button ion-button color="primary" class="btnBuscar" (click)='radar(parUsuarioRSSI)'>Radar</button>-->
-          <button *ngIf="aviso1" ion-button color="danger" class="btnMute" (click)='stopWarning()'>Mute</button>
+          <!--<button ion-button color="primary" class="btnBuscar" (click)='buscar(parUsuarioRSSI)'>Buscar</button>-->
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <label>{{parUsuarioRSSI.usuario}}</label>
+              </ion-col>                
+              <ion-col>
+                <label><ion-icon name="warning"></ion-icon> {{parUsuarioRSSI.distancias.lower}}</label>
+              </ion-col>
+              <ion-col>
+                <label><ion-icon name="alert"></ion-icon> {{parUsuarioRSSI.distancias.upper}}</label>
+              </ion-col>
+              <ion-col>
+                <label> RSSI:{{parUsuarioRSSI.rssi}}</label>
+              </ion-col>
+            </ion-row>              
+          </ion-grid>
+        <!--<button ion-button color="primary" class="btnBuscar" (click)='radar(parUsuarioRSSI)'>Radar</button>-->
+        <ion-item style="padding-left: 5px; background-color: rgb(245, 100, 100)">  
+          <ion-range dualKnobs="true" [(ngModel)]="parUsuarioRSSI.distancias" min="1" max="12" step="1" snaps="true" style="padding: 0%">
+              <ion-icon small range-left name="phone-portrait"></ion-icon>
+              <ion-icon range-right name="body"></ion-icon>                
+          </ion-range>
+        </ion-item> 
         </div>
         <!-- <button *ngIf="parUsuarioRSSI.danger" ion-button color="danger" class="btnMute" (click)='stopDanger()'>Mute</button> -->
         <!-- botoncito de mute??? para parar el sonido de alerta-->

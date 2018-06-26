@@ -91,7 +91,7 @@ export class BleServiceProvider {
   multiconect(grupo: Grupo) {
 
     grupo.usuarios.forEach(usuario => {
-        this.paresRSSI.push(new ParUsuarioRSSI(usuario.nombre, usuario.id_dispositivo, 0, 0, 0, false, false));
+        this.paresRSSI.push(new ParUsuarioRSSI(usuario.nombre, usuario.id_dispositivo, 0, 0, 0, false, false, {lower:0, upper:0}));
     });
 
     this.paresRSSI.forEach(par => {

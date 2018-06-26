@@ -21,6 +21,7 @@ export class GuMultiscanPage {
   paresUsuarioRSSIRef: Subscription  = null;
   intervals: number[];
   aviso1: boolean;
+  refresh: any;
 
   private warnings = new Subject<any>();
   public warningsSalida$ = this.warnings.asObservable();
@@ -49,7 +50,7 @@ export class GuMultiscanPage {
     this.intervals = [];
     this.grupo.usuarios.forEach(usuario => {
       this.listaUsuarioRSSI.push(new ParUsuarioRSSI(usuario.nombre, usuario.id_dispositivo, 0, 
-        usuario.distancia_warning, usuario.distancia_danger, false, false));
+        usuario.distancia_warning, usuario.distancia_danger, false, false, {lower:usuario.distancia_warning, upper:usuario.distancia_danger}));
       this.intervals.push(-1);
     });
     this.aviso1=false;
@@ -140,44 +141,40 @@ export class GuMultiscanPage {
       rssi => {
         console.log(par.uuid+' RSSI -> ', rssi);
         // en vez de guardar el valor que llega guardamos la media entre el que llega y el que tenemos
-        this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = (this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi + rssi)/2;
+        this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = Math.trunc((this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi + rssi)/2);
         console.log(par.uuid+' MEDIA RSSI -> ', this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi);
-
-        if (this.rssi2meter(rssi) >= this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].distancia_warning) {
+        let metros = this.rssi2meter(this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi);
+        let distanciaWarning = this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].distancias.lower;
+        let distanciaDanger = this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].distancias.upper;
+        console.log('Metros-> ', metros, ' DistanciaWarning-> ', distanciaWarning,' DistanciaDanger-> ', distanciaDanger);
+        if (metros >= distanciaWarning) {
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=true;
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false;
         }
-        if (this.rssi2meter(rssi) >= this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].distancia_danger) {
+        if (metros >= distanciaDanger) {
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=true;
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
         }
-        if (this.rssi2meter(rssi) <= this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].distancia_warning) {
+        if (metros <= distanciaWarning) {
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false; 
           this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
-        }
-        // this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].rssi = this.rssi2meter(rssi, 62, 4);
-        /*if (rssi<-77) {
-          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=true;
-          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false;
-        }
-        if (rssi<-80) {
-          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=true;
-          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
-        }
-        if (rssi>-75) {
-          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].danger=false; 
-          this.listaUsuarioRSSI[this.listaUsuarioRSSI.indexOf(par)].warning=false;
-        }*/
+        }        
         this.warnings.next(this.listaUsuarioRSSI);
       }, error => {
-        console.log(error); 
+        console.log(error);
+        this._ble.connect(par.uuid).subscribe(
+          peripheralData => {
+              console.log(peripheralData);                       
+          }, peripheralData => { 
+              console.log('disconnected', peripheralData); 
+          });
       });                                                 
     }, 700);
   }
 
   // RSSI to meter convertor
   rssi2meter(rssi) {
-    const A=60;
+    const A=-60;
     const N=2;
     return Math.trunc(Math.pow(10, ((A-rssi)/(10.0*N))));
     // https://iotandelectronics.wordpress.com/2016/10/07/how-to-calculate-distance-from-the-rssi-value-of-the-ble-beacon/
@@ -204,11 +201,18 @@ export class GuMultiscanPage {
 
   volver() {    
     this.desconectar();
+    clearInterval(this.refresh);
     this.navCtrl.pop();
   }
 
   radar(par) {
     this.navCtrl.push(BuscadorPage, {par: ParUsuarioRSSI});
+  }
+
+  refrescar() {    
+    this.refresh = setInterval(()=>{
+      console.log('refrescar');                                                   
+    }, 200);
   }
 
 }

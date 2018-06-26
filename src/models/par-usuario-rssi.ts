@@ -6,6 +6,10 @@ export class ParUsuarioRSSI {
         public distancia_warning: number,
         public distancia_danger: number,
         public warning: boolean,
-        public danger: boolean
+        public danger: boolean,
+        public distancias:{
+            upper:number,
+            lower:number
+          }
     ) {}
 }

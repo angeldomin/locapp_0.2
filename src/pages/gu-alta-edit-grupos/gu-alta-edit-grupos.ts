@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Grupo } from '../../models/grupo';
 import { FirebaseServiceProvider } from '../../providers/firebase-service/firebase-service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-import { UsuarioPage } from '../usuario/usuario';
+// import { UsuarioPage } from '../usuario/usuario';
 import { ListPage } from '../list/list';
 import { Usuario } from '../../models/usuario';
 
