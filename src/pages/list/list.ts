@@ -108,4 +108,8 @@ export class ListPage {
     this._bleService.conectar(usuario.id_dispositivo);
   }
 
+  volver() {
+    this.navCtrl.pop();
+  }
+
 }

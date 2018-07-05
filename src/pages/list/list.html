@@ -11,9 +11,6 @@
   <ion-list>
     <div class="divUsuario" ion-item *ngFor="let usuario of usuarios">      
       <label class="labelUsuario" (click)="seleccionar(usuario)">{{usuario.nombre}} {{usuario.apellido1}}</label>     
-      <button ion-button class="btnLink" (click)="seleccionar(usuario)">
-          <ion-icon name="link"></ion-icon>
-      </button>
       <button ion-button color="light" class="btnOptions" (click)="editar(usuario)">
         <ion-icon name="options"></ion-icon>
       </button>
@@ -23,8 +20,11 @@
     </div>
   </ion-list>
   <div class="divFoot" padding>
-    <button ion-button color="light" (click)="nuevoUsuario()">
+    <button ion-button class="btnNuevo" color="light" (click)="nuevoUsuario()">
       Nuevo usuario
+    </button>
+    <button ion-button  color="light" (click)="vovler()">
+      Volver
     </button>
   </div>
   <!--
