@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Alta/Edicion</ion-title>
+    <ion-title>Alta/Edicion Profesionales</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -9,7 +9,7 @@
     <ion-title>Edición de profesional</ion-title>
   </div>
   <div *ngIf="modo == 'new'">
-    <ion-title>Alta nueva de profesional</ion-title>
+    <ion-title>Alta de nuevo profesional</ion-title>
   </div>
   <form [formGroup]="profesionalForm" (ngSubmit)="guardar()">
     <ion-list>
@@ -39,6 +39,6 @@
     </div>
   </form>
   <div padding>      
-    <button ion-button color="primary" block class="btnVolver" (click)='volver()'>Cancelar</button>
+    <button ion-button color="light" block class="btnVolver" (click)='volver()'>Cancelar</button>
   </div>
 </ion-content>
