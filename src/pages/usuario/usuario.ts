@@ -150,7 +150,7 @@ export class UsuarioPage {
   }
 
   myCallbackFunction = function(_params) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {debugger;
       this.usuario = _params;
       resolve();
     });
@@ -191,6 +191,10 @@ export class UsuarioPage {
       buttons: ['Cerrar']
     });
     alert.present();
+  }
+
+  volver() {
+    this.navCtrl.pop();
   }
 
 }

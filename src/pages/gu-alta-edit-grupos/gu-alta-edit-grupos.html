@@ -26,9 +26,6 @@
       <ion-list>
         <div class="divUsuario" ion-item *ngFor="let usuario of grupo.usuarios">      
           <label class="labelUsuario" (click)="seleccionar(usuario)">{{usuario.nombre}} {{usuario.apellido1}}</label>     
-          <button ion-button class="btnLink" (click)="conectar(usuario)">
-              <ion-icon name="link"></ion-icon>
-          </button>
           <button ion-button color="light" class="btnOptions" (click)="editar(usuario)">
             <ion-icon name="options"></ion-icon>
           </button>
@@ -39,8 +36,8 @@
       </ion-list>
     </ion-list> 
   </form>
-  <div class="foot" padding>
-    <button ion-button color="light" (click)="guardar()" [disabled]="!grupoForm.valid">Confirmar</button>
-    <button ion-button color="light" class="btnVolver" (click)='volver()'>Cancelar</button>
+  <div class="divFoot" padding>
+    <button ion-button block color="light" (click)="guardar()" [disabled]="!grupoForm.valid">Confirmar</button>
+    <button ion-button block color="light" class="btnVolver" (click)='volver()'>Cancelar</button>
   </div>
 </ion-content>

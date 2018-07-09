@@ -12,9 +12,6 @@
   <ion-list>
     <div class="divGrupo" ion-item *ngFor="let grupo of grupos">
       <label class="labelGrupo" (click)="seleccionar(grupo)">{{grupo.nombre}} {{grupo.descripcion}}</label>
-      <button ion-button class="btnLink" (click)="seleccionar(grupo)">
-        <ion-icon name="link"></ion-icon>
-      </button>
       <button ion-button color="light" class="btnOptions" (click)="editar(grupo)">
         <ion-icon name="options"></ion-icon>
       </button>

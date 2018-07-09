@@ -70,13 +70,17 @@ export class DispositivosPage {
     this._bleService.scan();        
   }
 
-  registrar(dispositivo: Dispositivo) { //debugger;
+  registrar(dispositivo: Dispositivo) { debugger;
     this.usuario.id_dispositivo = dispositivo.uuid;
     // hacemos uso de callback para pasar el usuario modificado con el id del dispositivo   
     this.callback(this.usuario).then(()=>{      
       this.navCtrl.pop();
     });
     
+  }
+
+  volver() {
+    this.navCtrl.pop();
   }
 
  
